@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="ContactForm.css">
+
+</head>
+<body>
+    
+     <!-- =========================
+       Navbar (Pure CSS Version)
+  ========================== -->
+  
+<header>
+    <nav class="navbar">
+    <a href="/home/index.html" class="logo">HealthCare+</a>
+
+    <!-- Hamburger -->
+    <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <ul class="nav-links" id="nav-links">
+       <li><a href="/home/index.html">Home</a></li>
+        <li><a href="/Services/services.html">Services</a></li>
+        <li><a href="/aboutus/aboutus.html">About Us</a></li>
+        <li><a href="/ContactForm/ContactForm.html">Contact</a></li>
+        <li><a href="/logres/login.html" class="register-btn">Register</a></li>
+    </ul>
+    </nav>
+</header>
+
+<!-- =========================
+     Contact Form Section
+========================== -->
+<section class="contact-section">
+  <div class="contact-container">
+    
+    <!-- LEFT SIDE: Info + Branches -->
+    <div class="contact-info">
+      <h1>Get in Touch</h1>
+      <p>We’re here to help. Whether you have questions about our services, want to schedule an appointment, or need assistance, our team is ready to listen and assist you.</p>
+      
+      <h2>Our Branch Hospitals</h2>
+      <ul class="branch-list">
+        <li>🏥 HealthCare+ Manila – 123 Rizal Avenue, Manila</li>
+        <li>🏥 HealthCare+ Quezon City – 45 Commonwealth Ave., QC</li>
+        <li>🏥 HealthCare+ Cebu – 10 Osmeña Blvd., Cebu City</li>
+        <li>🏥 HealthCare+ Davao – 77 Roxas Avenue, Davao City</li>
+      </ul>
+
+      <p class="info-note">We’re open Monday to Saturday, 8:00 AM – 6:00 PM.  
+      For urgent inquiries, please contact your nearest branch directly.</p>
+    </div>
+
+    <!-- RIGHT SIDE: Contact Form -->
+    <div class="contact-form-container">
+      <h2>Send Us a Message</h2>
+      <form class="contact-form" id="contact-form">
+        <div class="input-group">
+          <input type="text" name="name" placeholder="Full Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- Popup Message -->
+<div id="thankyou-popup" class="popup">
+  <div class="popup-content">
+    <h3>Thank You!</h3>
+    <p>Thank you for messaging us. We’ll get back to you shortly.</p>
+    <button id="close-popup" class="btn">Close</button>
+  </div>
+</div>
+
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <p>Email: <a href="mailto:info@healthcareplus.com">info@healthcareplus.com</a></p>
+      <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+    </div>
+    <div class="footer-social">
+      <h3>Follow Us</h3>
+      <a href="#"><img src="/home/icons/facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="/home/icons/twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="/home/icons/instagram.png" alt="Instagram"></a>
+      <a href="#"><img src="/home/icons/linkedin.png" alt="LinkedIn"></a>
+    </div>
+  </div>
+  <p class="footer-copy">&copy; 2025 HealthCare+. All rights reserved.</p>
+</footer>
+
+<script src="ContactForm.js"></script>
+</body>
+</html>

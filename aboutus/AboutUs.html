@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Healthcare+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e7f2ef;
+            color: #19183b;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                url('https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif');
+            background-size: cover;
+            background-position: center;
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.05) translateY(-10px); }
+        }
+
+        /* Floating medical icons animation */
+        .medical-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .icon {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.08;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .icon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .icon:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
+        .icon:nth-child(3) { left: 50%; top: 60%; animation-delay: 4s; }
+        .icon:nth-child(4) { left: 20%; top: 70%; animation-delay: 6s; }
+        .icon:nth-child(5) { left: 70%; top: 80%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* ===========================
+           Navbar (from Services)
+        =========================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 50px;
+            background-color: rgba(25, 24, 59, 0.89);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: #19183B;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 50px;
+        }
+
+        /* Logo */
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Nav Links */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 12px 16px;
+            border-radius: 6px;
+            display: block;
+        }
+
+        .nav-links li a:hover {
+            color: #A1C2BD;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-links li a.active {
+            color: #A1C2BD;
+            border-bottom: 2px solid #A1C2BD;
+        }
+
+        /* Register Button */
+        .register-btn {
+            padding: 10px 20px !important;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #A1C2BD;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background: #A1C2BD !important;
+            color: #19183B !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(161, 194, 189, 0.5);
+        }
+
+        /* Mobile Menu + Hamburger */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 22px;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: #fff;
+            left: 0;
+            transition: 0.3s;
+        }
+
+        .menu-toggle span:nth-child(1) { top: 0; }
+        .menu-toggle span:nth-child(2) { top: 9px; }
+        .menu-toggle span:nth-child(3) { top: 18px; }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 9px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #19183B;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                width: 200px;
+                border-radius: 8px;
+                padding: 15px;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+        }
+
+        /* Header Section */
+        .page-header {
+            background: linear-gradient(135deg, #19183b 0%, #708993 100%);
+            color: #e7f2ef;
+            padding: 100px 20px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(161, 194, 189, 0.15) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        .page-header h1 {
+            font-size: 56px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            animation: fadeInDown 1s ease;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        /* About Section */
+        .about-section {
+            margin-bottom: 45px;
+            padding: 25px;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, #a1c2bd, #708993);
+            transition: height 0.4s ease;
+            border-radius: 5px;
+        }
+
+        .about-section:hover::before {
+            height: 100%;
+        }
+
+        .about-section:hover {
+            background-color: rgba(161, 194, 189, 0.1);
+            transform: translateX(15px);
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-section h2 {
+            color: #19183b;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #a1c2bd;
+            padding-bottom: 15px;
+            font-size: 34px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .about-section h2:hover {
+            border-color: #708993;
+            color: #708993;
+            transform: translateX(10px);
+        }
+
+        .about-section p {
+            line-height: 1.9;
+            color: #708993;
+            margin-bottom: 15px;
+            font-size: 17px;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 60px 0;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #a1c2bd 0%, #708993 100%);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .stat-box:hover::before {
+            transform: scale(1);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-15px) scale(1.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+        }
+
+        .stat-box h3 {
+            color: #19183b;
+            font-size: 48px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+        }
+
+        .stat-box p {
+            color: #19183b;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Carousel Section */
+        .carousel-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .carousel-section h2 {
+            color: #19183b;
+            margin-bottom: 40px;
+            font-size: 38px;
+            border-bottom: 4px solid #a1c2bd;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.6s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            padding: 50px;
+            background: linear-gradient(135deg, #a1c2bd 0%, #e7f2ef 100%);
+            text-align: center;
+        }
+
+        .carousel-item h3 {
+            color: #19183b;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .carousel-item p {
+            color: #708993;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #708993;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .dot:hover {
+            transform: scale(1.2);
+        }
+
+        .dot.active {
+            background-color: #19183b;
+            transform: scale(1.4);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Team Section */
+        .team-section {
+            margin: 70px 0;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            color: #19183b;
+            margin-bottom: 40px;
+            font-size: 38px;
+            border-bottom: 4px solid #a1c2bd;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, #ffffff 0%, #e7f2ef 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(161, 194, 189, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .team-card:hover::before {
+            left: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .team-card img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 6px solid #a1c2bd;
+            transition: all 0.4s ease;
+            object-fit: cover;
+        }
+
+        .team-card:hover img {
+            border-color: #708993;
+            transform: scale(1.15) rotate(-5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .team-card h3 {
+            color: #19183b;
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .team-card .specialty {
+            color: #708993;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .team-card .experience {
+            color: #a1c2bd;
+            font-size: 14px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #a1c2bd 0%, #708993 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        .service-card h3 {
+            color: #19183b;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .service-card p {
+            color: #19183b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ===========================
+           Footer (from Services)
+        =========================== */
+        footer {
+            background-color: #19183B;
+            color: #ffffff;
+            padding: 40px 20px 20px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact, .footer-social {
+            flex: 1 1 250px;
+        }
+
+        .footer-contact h3,
+        .footer-social h3 {
+            margin-bottom: 10px;
+            color: #A1C2BD;
+        }
+
+        .footer-contact a,
+        .footer-social a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover,
+        .footer-social a:hover {
+            color: #A1C2BD;
+        }
+
+        .footer-social a img {
+            width: 30px;
+            height: 30px;
+            margin: 0 8px;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social a img:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            .about-section h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Medical Icons -->
+    <div class="medical-icons">
+        <div class="icon">⚕️</div>
+        <div class="icon">🏥</div>
+        <div class="icon">💉</div>
+        <div class="icon">🩺</div>
+        <div class="icon">❤️</div>
+    </div>
+
+    <!-- Navigation Bar (from Services) -->
+    <header>
+        <nav class="navbar">
+            <a href="/home/index.html" class="logo">HealthCare+</a>
+
+            <!-- Hamburger -->
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/home/index.html">Home</a></li>
+                <li><a href="/Services/services.html">Services</a></li>
+                <li><a href="/aboutus/aboutus.html" class="active">About Us</a></li>
+                <li><a href="/ContactForm/ContactForm.html">Contact</a></li>
+                <li><a href="/logres/login.html" class="register-btn">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Header -->
+    <div class="page-header">
+        <h1>About Us</h1>
+        <p>Healthcare+ - Caring For Our Community Since 2020</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Our Story -->
+        <div class="about-section">
+            <h2>Our Story</h2>
+            <p>Healthcare+ was established in 2020 with a simple mission: to provide quality healthcare services for everyone in our community. What started as a small clinic with just 20 beds has now grown into a full-service hospital with over 200 beds and state-of-the-art medical facilities.</p>
+            <p>Over the years, we have been committed to serving our patients with compassion, integrity, and excellence. Our dedicated team of doctors, nurses, and staff work tirelessly to ensure that every patient receives the best possible care. We believe in treating not just the illness, but the whole person - body, mind, and spirit.</p>
+            <p>Our journey has been marked by continuous innovation and a relentless pursuit of medical excellence. From implementing cutting-edge diagnostic equipment to adopting the latest treatment protocols, we remain at the forefront of healthcare delivery in our region.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-box">
+                <h3>200+</h3>
+                <p>Hospital Beds</p>
+            </div>
+            <div class="stat-box">
+                <h3>150+</h3>
+                <p>Medical Staff</p>
+            </div>
+            <div class="stat-box">
+                <h3>50,000+</h3>
+                <p>Patients Yearly</p>
+            </div>
+            <div class="stat-box">
+                <h3>24/7</h3>
+                <p>Emergency Care</p>
+            </div>
+        </div>
+
+        <!-- Mission -->
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>To deliver exceptional healthcare services with compassion and dedication, ensuring the well-being of our patients and the community we serve. We strive to make quality healthcare accessible to all, regardless of their background or circumstances.</p>
+            <p>Our mission extends beyond medical treatment - we aim to educate our community about preventive care, promote healthy lifestyles, and create a supportive environment where healing can truly take place.</p>
+        </div>
+
+        <!-- Vision -->
+        <div class="about-section">
+            <h2>Our Vision</h2>
+            <p>To be the leading healthcare provider in the region, recognized for our commitment to medical excellence, patient care, and community health. We envision a future where every member of our community has access to world-class healthcare services.</p>
+            <p>We aspire to be pioneers in medical innovation, setting new standards in patient care while maintaining the warmth and personal touch that makes Healthcare+ special.</p>
+        </div>
+
+        <!-- Carousel Section -->
+        <div class="carousel-section">
+            <h2>Our Core Values</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="carousel">
+                    <div class="carousel-item">
+                        <h3>🤝 Compassion</h3>
+                        <p>We treat every patient with empathy, respect, and dignity. Our healthcare professionals understand that behind every diagnosis is a person with unique needs, fears, and hopes. We take the time to listen, understand, and provide care that addresses both physical and emotional well-being.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>⭐ Excellence</h3>
+                        <p>We maintain the highest standards of medical practice and continuously improve our services. Our commitment to excellence drives us to invest in the latest medical technologies, pursue ongoing education, and implement best practices that ensure optimal patient outcomes.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>🔬 Innovation</h3>
+                        <p>We embrace new technologies and methods to provide cutting-edge healthcare solutions. From telemedicine capabilities to advanced surgical techniques, we stay ahead of medical advancements to offer our patients the most effective treatments available.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>🏆 Integrity</h3>
+                        <p>We uphold ethical principles and transparency in all our operations. Our patients trust us with their most precious asset - their health - and we honor that trust by maintaining the highest ethical standards, clear communication, and honest practices in everything we do.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active" onclick="moveCarousel(0)"></span>
+                <span class="dot" onclick="moveCarousel(1)"></span>
+                <span class="dot" onclick="moveCarousel(2)"></span>
+                <span class="dot" onclick="moveCarousel(3)"></span>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="about-section">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>🚑 Emergency Care</h3>
+                    <p>24/7 emergency services with rapid response teams and advanced life support equipment.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🔬 Laboratory Services</h3>
+                    <p>State-of-the-art diagnostic testing with quick turnaround times and accurate results.</p>
+                </div>
+                <div class="service-card">
+                    <h3>👶 Maternity Care</h3>
+                    <p>Comprehensive prenatal, delivery, and postnatal care in a comfortable, family-centered environment.</p>
+                </div>
+                <div class="service-card">
+                    <h3>❤️ Cardiology</h3>
+                    <p>Advanced heart care with experienced cardiologists and cutting-edge cardiac equipment.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🩻 Radiology</h3>
+                    <p>Modern imaging services including X-ray, CT scan, MRI, and ultrasound technology.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💊 Pharmacy</h3>
+                    <p>On-site pharmacy with a wide range of medications and expert pharmaceutical consultation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section">
+            <h2>Meet Our Medical Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. James Anderson">
+                    <h3>Dr. James Anderson</h3>
+                    <p class="specialty">Chief of Surgery</p>
+                    <p class="experience">15 years experience</p>
+                </div>
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Sarah Martinez">
+                    <h3>Dr. Sarah Martinez</h3>
+                    <p class="specialty">Head of Cardiology</p>
+                    <p class="experience">12 years experience</p>
+                </div>
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Dr. Michael Chen">
+                    <h3>Dr. Michael Chen</h3>
+                    <p class="specialty">Pediatrics Specialist</p>
+                    <p class="experience">10 years experience</p>
+                </div>
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dr. Emily Johnson">
+                    <h3>Dr. Emily Johnson</h3>
+                    <p class="specialty">Emergency Medicine</p>
+                    <p class="experience">14 years experience</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="about-section">
+            <h2>Why Choose Us?</h2>
+            <p>At Healthcare+, we believe that every patient deserves personalized care and attention. Our team is available 24/7 to respond to medical emergencies and provide the support you need. We are committed to maintaining the highest standards of medical practice and continuously improving our services to meet the changing needs of our community.</p>
+            <p>What sets us apart is our holistic approach to healthcare. We don't just treat symptoms; we work with you to understand the root causes of health issues and develop comprehensive treatment plans. Our patient-centered philosophy ensures that you are always at the heart of every decision we make.</p>
+            <p>With state-of-the-art facilities, experienced medical professionals, and a genuine commitment to your well-being, Healthcare+ is more than just a hospital - we're your partner in health, dedicated to helping you live your best life.</p>
+        </div>
+    </div>
+
+    <!-- Footer (from Services) -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:info@healthcareplus.com">info@healthcareplus.com</a></p>
+                <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <a href="#"><img src="/home/icons/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="/home/icons/twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="/home/icons/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="/home/icons/linkedin.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+        <p class="footer-copy">&copy; 2025 HealthCare+. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const carousel = document.getElementById('carousel');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = 4;
+
+        function moveCarousel(index) {
+            currentSlide = index;
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        // Auto-rotate carousel every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            moveCarousel(currentSlide);
+        }, 5000);
+
+        // Mobile menu toggle
+        const toggle = document.getElementById("menu-toggle");
+        const navLinks = document.getElementById("nav-links");
+
+        toggle.addEventListener("click", () => {
+            toggle.classList.toggle("active");
+            navLinks.classList.toggle("show");
+        });
+    </script>
+</body>
+</html>

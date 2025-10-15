@@ -1,0 +1,189 @@
+body {
+    background: linear-gradient(135deg, #4f4ba2, #19183b, #030213);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bubbles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -150px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+    animation: rise linear infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.7);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(20px) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) translateX(-20px) scale(1.3);
+        opacity: 0;
+    }
+}
+
+.bubble:nth-child(1)  { left: 5%;  width: 20px; height: 20px; animation-duration: 8s;  animation-delay: 0s; }
+.bubble:nth-child(2)  { left: 15%; width: 35px; height: 35px; animation-duration: 10s; animation-delay: 2s; }
+.bubble:nth-child(3)  { left: 25%; width: 18px; height: 18px; animation-duration: 7s;  animation-delay: 1s; }
+.bubble:nth-child(4)  { left: 35%; width: 25px; height: 25px; animation-duration: 9s;  animation-delay: 3s; }
+.bubble:nth-child(5)  { left: 45%; width: 30px; height: 30px; animation-duration: 11s; animation-delay: 4s; }
+.bubble:nth-child(6)  { left: 55%; width: 22px; height: 22px; animation-duration: 6s;  animation-delay: 1.5s; }
+.bubble:nth-child(7)  { left: 65%; width: 40px; height: 40px; animation-duration: 12s; animation-delay: 5s; }
+.bubble:nth-child(8)  { left: 75%; width: 28px; height: 28px; animation-duration: 8s;  animation-delay: 2.2s; }
+.bubble:nth-child(9)  { left: 85%; width: 18px; height: 18px; animation-duration: 7.5s; animation-delay: 3.5s; }
+.bubble:nth-child(10) { left: 95%; width: 32px; height: 32px; animation-duration: 9s;  animation-delay: 2.8s; }
+
+.bubble:nth-child(11) { left: 12%; width: 16px; height: 16px; animation-duration: 6.2s; animation-delay: 1.7s; }
+.bubble:nth-child(12) { left: 28%; width: 22px; height: 22px; animation-duration: 8.3s; animation-delay: 3.1s; }
+.bubble:nth-child(13) { left: 42%; width: 30px; height: 30px; animation-duration: 10.5s; animation-delay: 4.4s; }
+.bubble:nth-child(14) { left: 58%; width: 26px; height: 26px; animation-duration: 7.9s; animation-delay: 2.6s; }
+.bubble:nth-child(15) { left: 72%; width: 20px; height: 20px; animation-duration: 6.8s; animation-delay: 1.2s; }
+.bubble:nth-child(16) { left: 82%; width: 38px; height: 38px; animation-duration: 11.2s; animation-delay: 5.2s; }
+.bubble:nth-child(17) { left: 18%; width: 24px; height: 24px; animation-duration: 7.6s; animation-delay: 2.4s; }
+.bubble:nth-child(18) { left: 33%; width: 15px; height: 15px; animation-duration: 5.8s; animation-delay: 0.9s; }
+.bubble:nth-child(19) { left: 47%; width: 28px; height: 28px; animation-duration: 9.4s; animation-delay: 3.6s; }
+.bubble:nth-child(20) { left: 63%; width: 19px; height: 19px; animation-duration: 6.5s; animation-delay: 1.8s; }
+
+.bubble:nth-child(21) { left: 8%;  width: 22px; height: 22px; animation-duration: 7.3s; animation-delay: 1.4s; }
+.bubble:nth-child(22) { left: 38%; width: 32px; height: 32px; animation-duration: 10.7s; animation-delay: 4.7s; }
+.bubble:nth-child(23) { left: 53%; width: 27px; height: 27px; animation-duration: 8.6s; animation-delay: 2.9s; }
+.bubble:nth-child(24) { left: 68%; width: 18px; height: 18px; animation-duration: 6.4s; animation-delay: 1.3s; }
+.bubble:nth-child(25) { left: 88%; width: 34px; height: 34px; animation-duration: 9.8s; animation-delay: 3.8s; }
+
+
+.auth-card {
+    position: relative;
+    z-index: 2;
+}
+
+.navbar-custom {
+    background-color: 19183B;
+}
+
+.navbar-custom .nav-link {
+    color: black;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link.active,
+.navbar-custom .nav-link:hover {
+    color: #51a2ff;
+}
+.navbar-brand {
+    color: white!important;
+}
+.btn-login {
+    background-color: #A1C2BD;
+    color: #19183B;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+}
+
+.btn-login:hover {
+    color: white;
+    background-color: #507c76;
+}
+
+.auth-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.auth-card {
+    max-width: 420px;
+    width: 100%;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.toggle-link {
+    color: #155dfc;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+}
+
+.hospital-container {
+  position: fixed;         /* overlay, independent of normal flow */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;    /* lets clicks pass through to auth-card */
+  z-index: -1;             /* sits above page background but below modal popups */
+}
+
+.floor {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #000000;
+
+  /* line up with auth-card center */
+  top: 61.5%;
+  transform: translateY(-50%);
+}
+
+.walking-png {
+  position: absolute;
+  top: 50%;                /* aligned to floor */
+  transform: translateY(-100%); /* feet touch floor */
+  width: 200px;
+  height: 200px;
+  animation: hop 1s infinite ease-in-out;
+  pointer-events: auto;    /* turn this on if you need clicks on PNGs */
+}
+
+
+.patient-walker {
+  position: absolute;
+  left: -220px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 200px;
+  transition: left 1s linear;
+  animation: bobbing 0.3s infinite alternate;
+}
+
+@keyframes bobbing {
+  from { transform: translateY(-48%); }
+  to   { transform: translateY(-52%); }
+}

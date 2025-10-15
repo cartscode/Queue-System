@@ -1,0 +1,300 @@
+/* ===========================
+   General Reset
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 50px;
+  background-color: rgba(25, 24, 59, 0.89);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header.scrolled {
+  background-color: #19183b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Nav Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.nav-links li a:hover {
+  color: #a1c2bd;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-links li a.active {
+  color: #a1c2bd;
+  border-bottom: 2px solid #a1c2bd;
+}
+
+/* Register Button */
+.register-btn {
+  padding: 10px 20px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #a1c2bd;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #a1c2bd;
+  color: #19183b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(161, 194, 189, 0.5);
+}
+
+/* Hamburger Menu (Mobile) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  background: #fff;
+  height: 3px;
+  width: 25px;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+/* ===========================
+   Sections (Report / Consultation / Health)
+=========================== */
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.3s;
+  margin: 60px auto;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 15px;
+  background: #f4f8ff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section:hover {
+  transform: scale(1.01);
+  transition: 0.4s ease;
+}
+
+/* Headings */
+section h2 {
+  color: #004aad;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+section p {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Info Boxes */
+.report-info,
+.consultation-info,
+.health-info {
+  background: #fff;
+  border-left: 5px solid;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.report-info:hover,
+.consultation-info:hover,
+.health-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.report-info {
+  border-left-color: #007bff;
+}
+
+.consultation-info {
+  border-left-color: #00b894;
+}
+
+.health-info {
+  border-left-color: #ff6b6b;
+}
+
+.report-info h3,
+.consultation-info h3,
+.health-info h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+footer {
+  background-color: #19183b;
+  color: #ffffff;
+  padding: 40px 20px 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.footer-contact,
+.footer-social {
+  flex: 1 1 250px;
+}
+
+.footer-contact h3,
+.footer-social h3 {
+  margin-bottom: 10px;
+  color: #a1c2bd;
+}
+
+.footer-contact a,
+.footer-social a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover,
+.footer-social a:hover {
+  color: #a1c2bd;
+}
+
+.footer-social a img {
+  width: 30px;
+  height: 30px;
+  margin: 0 8px;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.footer-social a img:hover {
+  transform: scale(1.2);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-top: 10px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: #19183b;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  section {
+    padding: 25px;
+    margin: 30px 15px;
+  }
+
+  section h2 {
+    font-size: 24px;
+  }
+
+  section p {
+    font-size: 15px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
