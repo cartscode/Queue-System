@@ -1,189 +1,142 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HealthCare+ Queue Management</title>
-        <!-- Link to external Font Awesome for icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <!-- Link to external CSS file (style.css) -->
-        <link rel="stylesheet" href="infoms.css">
-    </head>
-    <body>
-<!-- PLease don't touch anything below this -->
-        <!-- Notification/Error Modal (Instead of alert()) -->
-        <div id="status-modal" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 8px 15px rgba(0,0,0,0.2); z-index: 2000; min-width: 300px; text-align: center;">
-            <p id="modal-message" style="font-weight: 500;"></p>
-            <button onclick="document.getElementById('status-modal').classList.add('hidden')" style="margin-top: 15px; padding: 8px 15px; background: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">OK</button>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="infoms.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Hospital Queue Management</title>
+</head>
+<body>
 
-        <header id="main-header">
-            <div class="navbar">
-                <a href="#" class="logo">HealthCare+</a>
-                <nav>
-                    <ul class="nav-links" id="nav-links">
-                    <li><a href="/home/index.html">Home</a></li>
-                   <li><a href="/Services/services.html">Services</a></li>
-                  <li><a href="/aboutus/aboutus.html">About Us</a></li>
-                 <li><a href="/ContactForm/ContactForm.html">Contact</a></li>
-                        <li><a href="/home/index.html" id="auth-status">Log out</a></li>
-                    </ul>
-                </nav>
-                <!-- Hamburger Menu Toggle (Visible on Mobile) -->
-                <div class="menu-toggle" id="menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </header>
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo">HealthCare+</a>
 
-        <main>
-            <div class="dashboard-container">
-                <!-- Dashboard Header & Indicators -->
-                <div class="dashboard-header-area">
-                    <div>
-                        <h1 class="dashboard-title">Hospital Queue Management</h1>
-                        <p class="dashboard-subtitle">Real-time patient queue monitoring and management system</p>
-                        <div class="status-indicators-group" id="status-indicators">
-                            <!-- Indicators dynamically inserted here by script.js -->
-                        </div>
-                    </div>
-                </div>
+    <!-- Hamburger -->
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-                <!-- Metrics Grid -->
-                <div class="dashboard-grid" id="metrics-grid">
-                    <!-- Metric Cards dynamically inserted here by script.js -->
-                </div>
-            </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/home/index.html">Home</a></li>
+      <li><a href="/Services/services.html">Services</a></li>
+      <li><a href="/aboutus/">About Us</a></li>
+      <li><a href="/ContactForm/ContactForm.html">Contact</a></li>
+      <li><a href="/logres/login.html" class="register-btn">Log out</a></li>
+    </ul>
+  </nav>
+</header>
 
-            <!-- Main Content (Tabs and Panels) -->
-            <div class="dashboard-main-content">
-                <!-- Tab Bar -->
-                <div class="dashboard-tabs">
-                   <li><button id="live-dashboard-btn" class="live-btn">Live Dashboard</button></li>
-                    <button class="tab active" data-panel="queue-management">Queue Management</button>
+<section style="text-align:center; margin-top:30px;">
+  <h1>Hospital Queue Management</h1>
+  <p>Real-time patient queue monitoring and management system</p>
+</section>
 
-                </div>
+<!-- Live Dashboard Summary -->
+<div class="dashboard-summary">
+  <div class="card-summary">
+    <div class="icon purple">👥</div>
+    <div>
+      <p>Total Patients</p>
+      <h2 id="totalPatients">0</h2>
+    </div>
+  </div>
 
-                <div class="panels-content-wrapper">
-                    <!-- Panel 1: Queue Management -->
-                    <div class="panel-content" id="queue-management">
-                        <div class="queue-layout-grid">
-                            <!-- Registration Form -->
-                            <div class="card register-patient-card">
-                                <h2><i class="fas fa-user-plus icon"></i>Register New Patient</h2>
-                                <form id="registration-form">
-                                    <div class="input-group">
-                                        <div class="form-field">
-                                            <label for="patient-name">Patient Name</label>
-                                            <input type="text" id="patient-name" placeholder="Enter full name" required>
-                                        </div>
-                                        <div class="form-field">
-                                            <label for="patient-age">Age</label>
-                                            <input type="number" id="patient-age" min="0" placeholder="Enter age" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-field full-width">
-                                        <label for="patient-condition">Chief Complaint/Condition</label>
-                                        <input type="text" id="patient-condition" placeholder="e.g., Severe headache, Sprained ankle" required>
-                                    </div>
-                                    <div class="form-field full-width">
-                                        <label for="patient-priority">Triage Priority</label>
-                                        <select id="patient-priority" required>
-                                            <option value="low">Low</option>
-                                            <option value="normal" selected>Normal - Standard priority</option>
-                                            <option value="urgent">Urgent</option>
-                                            <option value="emergency">Emergency</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="add-patient-btn">Add Patient to Queue</button>
-                                </form>
-                            </div>
+  <div class="card-summary">
+    <div class="icon yellow">⏳</div>
+    <div>
+      <p>Currently Waiting</p>
+      <h2 id="waitingPatients">0</h2>
+    </div>
+  </div>
 
-                            <!-- Patient Queue Table -->
-                            <div class="card patient-queue-card">
-                                <!-- Patient count is updated dynamically -->
-                                <h2 id="queue-title"><i class="fas fa-list-alt icon"></i>Patient Queue (0 patients)</h2>
-                                <div class="queue-controls">
-                                    <input type="text" id="queue-search" placeholder="Search by patient name...">
-                                    <select id="queue-filter-priority">
-                                        <option value="">All Priorities</option>
-                                        <option value="emergency">Emergency</option>
-                                        <option value="urgent">Urgent</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="low">Low</option>
-                                    </select>
-                                    <select id="queue-filter-status">
-                                        <option value="">All Statuses</option>
-                                        <option value="waiting">Waiting</option>
-                                        <option value="inprogress">In Progress</option>
-                                        <option value="completed">Completed</option>
-                                    </select>
-                                    <div class="live-dashboard">
-                                       
-                                </div> 
-                                <!-- Table Scroll Wrapper for Mobile Responsiveness -->
-                                <div class="table-scroll">
-                                    <table class="queue-table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Age</th>
-                                                <th>Condition</th>
-                                                <th>Priority</th>
-                                                <th>Status</th>
-                                                <th>Registered</th>
-                                                <th>Wait Time</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="queue-table-body">
-                                            <tr><td colspan="9" style="text-align: center; color: var(--text-light);">Queue is empty or loading...</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="card-summary">
+    <div class="icon violet">⚕️</div>
+    <div>
+      <p>In Progress</p>
+      <h2 id="inProgress">0</h2>
+    </div>
+  </div>
 
-                    <!-- Panel 2: Priority Dashboard (Now hidden initially) -->
-                    <div class="panel-content hidden" id="priority-dashboard">
-                        <div class="priority-dashboard-layout">
-                            <div class="card priority-distribution-card">
-                                <h2><i class="fas fa-chart-pie icon"></i>Triage Distribution</h2>
-                                <div id="priority-distribution-charts">
-                                    <!-- Distribution bars dynamically inserted here -->
-                                    <p style="color: var(--text-light);">Loading priority distribution...</p>
-                                </div>
-                            </div>
-                            <div class="card performance-metrics-card">
-                                <h2><i class="fas fa-hourglass-half icon"></i>Performance Metrics</h2>
-                                <div class="metric-stats">
-                                    <!-- Stats here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="card-summary">
+    <div class="icon green">🕐</div>
+    <div>
+      <p>Avg Wait Time</p>
+      <h2 id="avgWait">&lt; 1 min</h2>
+    </div>
+  </div>
+</div>
 
-                    <!-- Panel 3: Statistics (New empty panel) -->
-                    <div class="panel-content hidden" id="statistics">
-                        <div class="card">
-                            <h2><i class="fas fa-chart-bar icon"></i>Detailed Visit Statistics</h2>
-                            <p style="color: var(--text-light);">This panel will contain detailed daily, weekly, and monthly statistics (e.g., volume trends, staff efficiency) once the feature is built.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+<div class="container">
+  <!-- Register Form -->
+  <div class="card">
+    <h3>➕ Register New Patient</h3>
+    <label>Patient Name</label>
+    <input type="text" id="patientName" placeholder="Enter full name">
+    <label>Age</label>
+    <input type="number" id="patientAge" placeholder="Enter age">
+    <label>Chief Complaint/Condition</label>
+    <input type="text" id="patientCondition" placeholder="e.g., Severe headache, Sprained ankle">
+    <label>Patient Type</label>
+    <select id="patientType">
+      <option value="regular">Regular patient</option>
+      <option value="priority">Priority patient</option>
+    </select>
+    <button onclick="addPatient()">Add Patient to Queue</button>
+    <button onclick="goToDashboard()">Live Dashboard</button>
+  </div>
 
-        <!-- Footer -->
-        <footer>
-            <!-- Footer content goes here -->
-        </footer>
+  <!-- Queues Display -->
+  <div>
+    <div class="card queue-section">
+      <h4>📋 Regular Patient Queue</h4>
+      <table id="regularQueue">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Condition</th>
+            <th>Registered</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="regularQueueBody">
+          <tr><td colspan="7" class="empty">Queue is empty...</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-        <!-- Link to external JavaScript module -->
-        <script type="module" src="scripttest.js"></script>
-    </body>
-    </html>
+    <div class="card queue-section">
+      <h4>📋 Priority Patient Queue</h4>
+      <table id="priorityQueue">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Condition</th>
+            <th>Registered</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="priorityQueueBody">
+          <tr><td colspan="7" class="empty">Queue is empty...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="scriptinfo.js">
+</script>
+
+
+
+</body>
+</html>

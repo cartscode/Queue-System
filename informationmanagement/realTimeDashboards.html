@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Healthcare Dashboards</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Font Configuration (Inter) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+     
+             
+    </style>
+    <link rel="stylesheet" href="realTimeDashboards.css">
+</head>
+<body class="min-h-screen">
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-4 text-center">
+            Real-Time Patient Flow Management
+        </h1>
+
+        <!-- TAB NAVIGATION -->
+        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 mb-8 justify-center">
+            
+            <!-- Regular Patients Tab (Active by default) -->
+            <button id="tab-regular" onclick="showDashboard('regular')" 
+                class="flex-1 sm:flex-none font-semibold py-3 px-8 rounded-xl 
+                       transition duration-300 ease-in-out focus:outline-none 
+                       focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 
+                       active:scale-[0.98]">
+                <i data-lucide="users" class="w-5 h-5 inline mr-2"></i> Regular Patient Queue (Triage)
+            </button>
+
+            <!-- Priority Patients Tab (Inactive by default) -->
+            <button id="tab-priority" onclick="showDashboard('priority')" 
+                class="flex-1 sm:flex-none font-semibold py-3 px-8 rounded-xl 
+                       transition duration-300 ease-in-out focus:outline-none 
+                       focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50
+                       active:scale-[0.98]">
+                <i data-lucide="wheelchair" class="w-5 h-5 inline mr-2 text-red-600"></i> Priority Patient Queue (FIFO)
+            </button>
+        </div>
+
+        <!-- DASHBOARD CONTAINER -->
+        <div id="dashboard-container" class="space-y-8">
+            <!-- Content will be injected/shown here via JavaScript -->
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- TEMPLATE: REGULAR PATIENTS DASHBOARD (WITH TRIAGE QUEUE) -->
+        <!-- ======================================================= -->
+        <template id="regular-template">
+            <section id="regular-dashboard-content" class="space-y-6">
+                <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-indigo-500 pb-2 flex items-center">
+                    <i data-lucide="users" class="w-6 h-6 mr-3 text-indigo-600"></i> Regular Patients
+                </h2>
+
+                <!-- Key Metrics Cards (4 columns on large screens) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    
+                    <!-- Card 1: Total Patients -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container"><i data-lucide="trending-up" class="text-indigo-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Total Patients</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-gray-900">125</p>
+                    </div>
+
+                    <!-- Card 2: Waiting Patients -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container"><i data-lucide="clock" class="text-indigo-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Waiting in Queue</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-gray-900">24</p>
+                    </div>
+
+                    <!-- Card 3: In Progress -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container"><i data-lucide="stethoscope" class="text-indigo-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Currently Serving</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-gray-900">8</p>
+                    </div>
+
+                    <!-- Card 4: Avg Wait Time -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container"><i data-lucide="timer" class="text-indigo-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Avg Wait Time</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-red-600">15<span class="text-xl font-normal text-gray-500 ml-1">min</span></p>
+                    </div>
+
+                </div>
+                
+                <!-- Regular Patient Triage Queue Table (Full width) -->
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 mr-2 text-brand-accent"></i> Regular Patient Triage Queue
+                    </h3>
+                    <div class="overflow-x-auto -mx-1">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
+                                    <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Condition</th>
+                                    <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <!-- Removed T'ment column here -->
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200 text-sm">
+                                <!-- Patient 1: High Priority Waiting for Triage -->
+                                <tr class="bg-yellow-50/50 hover:bg-yellow-100 transition duration-100">
+                                    <td class="px-3 py-2 whitespace-nowrap font-medium text-gray-900">R-025</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">J. Smith</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">34</td>
+                                    <td class="px-3 py-2 text-red-700 font-medium">High Fever</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Being Treated</span>
+                                    </td>
+                                    <!-- Removed T'ment data here -->
+                                </tr>
+                                <!-- Patient 2: In Progress -->
+                                <tr class="bg-green-50/50 hover:bg-green-100 transition duration-100">
+                                    <td class="px-3 py-2 whitespace-nowrap font-medium text-gray-900">R-024</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">E. Johnson</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">28</td>
+                                    <td class="px-3 py-2 text-gray-700">Allergy C.</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Waiting</span>
+                                    </td>
+                                    <!-- Removed T'ment data here -->
+                                </tr>
+                                <!-- Patient 3: Queued -->
+                                <tr class="hover:bg-gray-50 transition duration-100">
+                                    <td class="px-3 py-2 whitespace-nowrap font-medium text-gray-900">R-026</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">M. Brown</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">51</td>
+                                    <td class="px-3 py-2 text-gray-700">Routine Check</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Queued</span>
+                                    </td>
+                                    <!-- Removed T'ment data here -->
+                                </tr>
+                                <!-- Patient 4: Post-Triage Wait -->
+                                <tr class="hover:bg-gray-50 transition duration-100">
+                                    <td class="px-3 py-2 whitespace-nowrap font-medium text-gray-900">R-027</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">S. Lee</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">19</td>
+                                    <td class="px-3 py-2 text-gray-700">Sprain</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Queued</span>
+                                    </td>
+                                    <!-- Removed T'ment data here -->
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition duration-100">
+                                    <td class="px-3 py-2 whitespace-nowrap font-medium text-gray-900">R-028</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">D. Rodriguez</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">44</td>
+                                    <td class="px-3 py-2 text-gray-700">Back Pain</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Queued</span>
+                                    </td>
+                                    <!-- Removed T'ment data here -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center pt-4 border-t mt-4">
+                        <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-700 transition duration-150 flex items-center justify-center">
+                            View Full Regular Queue (24 patients total) <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+
+        <!-- ======================================================= -->
+        <!-- TEMPLATE: PWD/SENIOR CITIZENS (PRIORITY) DASHBOARD -->
+        <!-- ======================================================= -->
+        <template id="priority-template">
+             <section id="priority-dashboard-content" class="space-y-6">
+                <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-red-500 pb-2 flex items-center">
+                    <i data-lucide="wheelchair" class="w-6 h-6 mr-3 text-red-600"></i> Priority Patients 
+                </h2>
+
+                <!-- Priority Summary Metrics (Condensed - 4 columns on large screens) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Card 1: Priority Waiting -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32 border-l-4 border-red-500">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container priority-icon-container"><i data-lucide="users" class="text-red-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Priority Waiting</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-red-600">5</p>
+                    </div>
+
+                    <!-- Card 2: Priority Wait Time -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container priority-icon-container"><i data-lucide="hourglass" class="text-red-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Avg Priority Wait</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-green-600">5<span class="text-xl font-normal text-gray-500 ml-1">min</span></p>
+                    </div>
+
+                    <!-- Card 3: Priority Served Today -->
+                    <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container priority-icon-container"><i data-lucide="check-circle" class="text-green-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Served Today</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-gray-900">18</p>
+                    </div>
+
+                    <!-- Card 4: Compliance -->
+                     <div class="bg-white p-4 rounded-xl card-shadow flex flex-col justify-between h-32">
+                        <div class="flex items-center space-x-2">
+                            <div class="icon-container priority-icon-container"><i data-lucide="alert-triangle" class="text-red-600 h-5 w-5"></i></div>
+                            <p class="text-sm font-medium text-gray-500">Overdue ( > 10 min)</p>
+                        </div>
+                        <p class="text-4xl font-extrabold text-green-600">0</p>
+                    </div>
+                </div>
+
+                <!-- Priority Live Queue (FIFO) - Full width -->
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i data-lucide="list-ordered" class="w-5 h-5 mr-2 text-red-600"></i> Live Priority Patient Queue (FIFO Order)
+                    </h3>
+                    <div class="space-y-3">
+                        <!-- Queue Item 1 (Next Up) -->
+                        <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-lg flex justify-between items-center transition duration-150 hover:shadow-md">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl font-extrabold text-red-700 w-10 text-center">1</span>
+                                <div>
+                                    <p class="text-lg font-bold text-red-700">P-005 (PWD) - Jane Doe</p>
+                                    <p class="text-sm text-gray-600">Waiting Since: 10:35 AM | Condition: Severe Knee Pain</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold text-white bg-red-500 px-3 py-1 rounded-full">NEXT UP</span>
+                        </div>
+                        <!-- Queue Item 2 -->
+                        <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center border-l-4 border-gray-200">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl font-extrabold text-gray-700 w-10 text-center">2</span>
+                                <div>
+                                    <p class="text-lg font-semibold text-gray-800">P-006 (Senior) - Michael Chen</p>
+                                    <p class="text-sm text-gray-600">Waiting Since: 10:38 AM | Condition: Routine Blood Pressure Check</p>
+                                </div>
+                            </div>
+                            <span class="text-sm text-gray-500">Est. 3 min</span>
+                        </div>
+                        <!-- Queue Item 3 -->
+                        <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center border-l-4 border-gray-200">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl font-extrabold text-gray-700 w-10 text-center">3</span>
+                                <div>
+                                    <p class="text-lg font-semibold text-gray-800">P-007 (PWD) - David Williams</p>
+                                    <p class="text-sm text-gray-600">Waiting Since: 10:41 AM | Condition: Post-Op Follow-up</p>
+                                </div>
+                            </div>
+                            <span class="text-sm text-gray-500">Est. 7 min</span>
+                        </div>
+                        <!-- View More -->
+                        <div class="text-center pt-2 border-t mt-4">
+                            <a href="#" class="text-sm font-medium text-red-600 hover:text-red-700 transition duration-150 flex items-center justify-center">
+                                View Full Priority List (5 patients total) <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </template>
+        
+    </main>
+
+    <script>
+        // Initialize Lucide icons on load
+        lucide.createIcons();
+
+        // Get elements
+        const dashboardContainer = document.getElementById('dashboard-container');
+        const regularTemplate = document.getElementById('regular-template');
+        const priorityTemplate = document.getElementById('priority-template');
+        const tabRegular = document.getElementById('tab-regular');
+        const tabPriority = document.getElementById('tab-priority');
+
+        // Define state classes for smooth transition
+        const ACTIVE_CLASSES = ['bg-purple-700', 'text-white', 'shadow-xl', 'hover:bg-purple-800', 'border-transparent'];
+        const INACTIVE_CLASSES = ['bg-white', 'text-gray-700', 'border', 'border-gray-300', 'shadow-md', 'hover:bg-gray-100'];
+
+
+        /**
+         * Switches the content displayed in the dashboard container and manages button styles.
+         * @param {string} view - The view to display ('regular' or 'priority').
+         */
+        function showDashboard(view) {
+            // 1. Clear existing content
+            dashboardContainer.innerHTML = '';
+            
+            // 2. Clone and append new content based on the view
+            if (view === 'regular') {
+                const clone = regularTemplate.content.cloneNode(true);
+                dashboardContainer.appendChild(clone);
+                
+                // 3. Update active button styles for REGULAR tab
+                // Remove inactive classes and add active classes to Regular tab
+                tabRegular.classList.remove(...INACTIVE_CLASSES);
+                tabRegular.classList.add(...ACTIVE_CLASSES);
+                
+                // Remove active classes and add inactive classes to Priority tab
+                tabPriority.classList.remove(...ACTIVE_CLASSES);
+                tabPriority.classList.add(...INACTIVE_CLASSES);
+
+                // Ensure the icon in the regular tab is white (from the ACTIVE_CLASSES)
+                const regularIcon = tabRegular.querySelector('[data-lucide="users"]');
+                if(regularIcon) regularIcon.classList.remove('text-red-600'); 
+            
+            } else if (view === 'priority') {
+                const clone = priorityTemplate.content.cloneNode(true);
+                dashboardContainer.appendChild(clone);
+                
+                // 3. Update active button styles for PRIORITY tab
+                // Remove inactive classes and add active classes to Priority tab
+                tabPriority.classList.remove(...INACTIVE_CLASSES);
+                tabPriority.classList.add(...ACTIVE_CLASSES);
+
+                // Remove active classes and add inactive classes to Regular tab
+                tabRegular.classList.remove(...ACTIVE_CLASSES);
+                tabRegular.classList.add(...INACTIVE_CLASSES);
+
+                // Ensure the icon in the priority tab is white (from the ACTIVE_CLASSES)
+                const priorityIcon = tabPriority.querySelector('[data-lucide="wheelchair"]');
+                if(priorityIcon) priorityIcon.classList.add('text-white');
+            }
+
+            // 4. Re-initialize icons for the newly injected content
+            lucide.createIcons();
+        }
+
+        // Load the regular dashboard on initial page load
+        window.onload = () => {
+             // Re-initialize icons from the main document (nav bar)
+            lucide.createIcons();
+            // Manually set initial state for smooth transition on first load
+            tabRegular.classList.add(...ACTIVE_CLASSES);
+            tabPriority.classList.add(...INACTIVE_CLASSES);
+            showDashboard('regular');
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // ===============================
+        // 🧠 DATA STORAGE FUNCTION (PATIENT QUEUE ARRAY)
+        // This section simulates a basic in-memory data storage
+        // for patients (can be regular or priority).
+        // It doesn't show anything on screen yet — no buttons or DOM edits.
+        // You can later connect this function to forms or API.
+        // ===============================
+
+        // Initialize an empty array to store patient data
+        const patientData = [];
+
+        /**
+         * Adds a new patient record to the array.
+         * @param {string} id - Patient ID (e.g., "R-001" or "P-001")
+         * @param {string} name - Patient name
+         * @param {number} age - Patient age
+         * @param {string} condition - Patient condition summary
+         * @param {string} type - Type of patient ("regular" or "priority")
+         */
+        function addPatient(id, name, age, condition, type) {
+            const newPatient = {
+                id,
+                name,
+                age,
+                condition,
+                type,
+                addedAt: new Date().toLocaleString()
+            };
+
+            // Push to array (like enqueue)
+            patientData.push(newPatient);
+
+            // Optional: print current array in console
+            console.log("✅ New patient added:", newPatient);
+            console.log("📋 Current patient list:", patientData);
+        }
+
+        // Example usage (you can delete or comment this out later):
+        // addPatient("R-029", "Alice Garcia", 27, "Flu", "regular");
+        // addPatient("P-008", "Jose Santos", 70, "High Blood Pressure", "priority");
+
+    </script>
+
+    
+</body>
+</html>

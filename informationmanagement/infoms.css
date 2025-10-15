@@ -1,110 +1,97 @@
-/* --- Global Styles & Variables --- */
-:root {
-    --bg-light: #f5f6fa; /* Lighter background for main area */
-    --text-dark: #333333;
-    --text-light: #6c757d;
-    --header-dark: #252444; /* Deep Indigo from image */
-    --primary-color: #4b3d8c; /* Primary color for buttons/accents (Purple) */
-    
-    /* Indicator & Tag Colors (Moved inside :root) */
-    --total-bg: #e6f0ff;    --total-color: #4b3d8c;
-    --waiting-bg: #fff4e0;  --waiting-color: #ffa500;
-    --inprogress-bg: #f2e6ff; --inprogress-color: #8a2be2;
-    --completed-bg: #e6ffe6; --completed-color: #28a745;
-    --emergency-bg: #dc3545; --emergency-color: #ffffff;
-}
-
+/* ===========================
+   General Reset
+=========================== */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-body {
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+/* Background Video */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes the video fill screen */
+  z-index: -1;       /* keeps video behind everything */
 }
-
-main {
-    flex-grow: 1;
-}
-
-/* --- Base Card Style (Clean and prominent) --- */
-.card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05); /* Slightly stronger shadow */
-    border: 1px solid #eeeeee;
-    transition: transform 0.3s ease;
-}
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* Utility for hidden elements */
-.hidden { display: none !important; }
 
 /* ===========================
-    Navbar (Dark Indigo Theme)
+   Navbar (Pure CSS)
 =========================== */
 header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 15px 50px;
-    background-color: var(--header-dark); /* Deep Indigo */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 50px;
+  background-color: rgba(25, 24, 59, 0.89); /* semi-transparent */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 header.scrolled {
-    background-color: var(--header-dark);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #19183B; /* solid color after scroll */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Logo */
 .logo {
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-/* Nav Links (Desktop Style) */
+/* Nav Links */
 .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px; /* Increased gap for cleaner look */
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
 .nav-links li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 8px 12px;
-    border-radius: 6px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
 }
 
 .nav-links li a:hover {
-    color: #A1C2BD;
-    background: rgba(255, 255, 255, 0.1);
+  color: #A1C2BD;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-links li a.active {
-    color: #A1C2BD;
-    border-bottom: 2px solid #A1C2BD;
+  color: #A1C2BD;
+  border-bottom: 2px solid #A1C2BD;
+}
+
+/* Register Button */
+.register-btn {
+  padding: 10px 20px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #A1C2BD;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #A1C2BD;
+  color: #19183B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(161, 194, 189, 0.5);
 }
 
 /* ===========================
@@ -169,406 +156,181 @@ header.scrolled {
   .nav-links.show {
     display: flex;
   }
+  
 }
-/* =======================================================
-    2. Dashboard Header & Indicators (Top Section)
-    ======================================================= */
-.dashboard-container {
-    padding: 20px;
-    margin: 0 20px;
-}
-.dashboard-header-area {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding-bottom: 20px;
-}
-.dashboard-title {
-    font-size: 30px; /* Slightly larger title */
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 5px;
-}
-.dashboard-subtitle {
-    font-size: 15px;
-    color: var(--text-light);
-    margin-bottom: 15px;
-}
-.status-indicators-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-/* Indicator styling to match the image's pill shape */
-.indicator {
-    padding: 6px 10px;
-    border-radius: 20px; /* Pill shape */
-    font-weight: 600;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: background-color 0.2s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-/* Indicator colors matching the image */
-.indicator.total { background-color: var(--total-bg); color: var(--total-color); }
-.indicator.waiting { background-color: var(--waiting-bg); color: var(--waiting-color); }
-.indicator.in-progress { background-color: var(--inprogress-bg); color: var(--inprogress-color); }
-.indicator.completed { background-color: var(--completed-bg); color: var(--completed-color); }
-.indicator.emergency { 
-    background-color: var(--emergency-bg); 
-    color: var(--emergency-color); 
-    font-weight: 700;
-}
-
-/* =======================================================
-    3. Metrics Grid Styles (4 Cards)
-    ======================================================= */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding-bottom: 30px;
-}
-.metric-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-.metric-title {
-    color: #6c757d;
-    font-size: 14px;
-    font-weight: 500;
-}
-.metric-value {
-    font-size: 32px; /* Slightly larger value */
-    font-weight: bold;
-    margin-top: 5px;
-}
-/* Adjusted Icon BG to be smaller and offset as in the image */
-.metric-icon-bg {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-/* Metric Icon BG colors matching the image */
-.metric-icon-bg.total { background-color: var(--total-bg); color: var(--total-color); }
-.metric-icon-bg.waiting { background-color: var(--waiting-bg); color: var(--waiting-color); }
-.metric-icon-bg.in-progress { background-color: var(--inprogress-bg); color: var(--inprogress-color); }
-.metric-icon-bg.completed { background-color: var(--completed-bg); color: var(--completed-color); }
-
-.metric-box:hover .metric-icon-bg {
-    transform: scale(1.1) rotate(5deg);
-}
-
-
-/* =======================================================
-    4. Tabs and Panel Switching (Pill Style)
-    ======================================================= */
-.dashboard-main-content {
-    margin: 0 20px 20px 20px;
-}
-/* Tab Bar */
-.dashboard-tabs {
-    display: inline-flex;
-    background-color: transparent;
-    border-bottom: 2px solid #e0e0e0;
-    margin-bottom: 25px;
-    overflow-x: auto;
-}
-.tab {
-    background: transparent;
-    border: none;
-    padding: 8px 18px;
-    font-size: 15px;
-    cursor: pointer;
-    color: var(--text-light);
-    font-weight: 500;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px; /* To overlap border-bottom */
-}
-.tab:hover {
-    color: var(--text-dark);
-}
-.tab.active {
-    color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-    font-weight: 600;
-}
-
-/* Panel Switching */
-.panels-content-wrapper {
-    min-height: 500px;
-}
-.panel-content.hidden {
-    display: none;
-}
-.priority-dashboard-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-/* =======================================================
-    5. Queue Management Panel (Form & Table)
-    ======================================================= */
-.queue-layout-grid {
-    display: grid;
-    grid-template-columns: 1fr 2.5fr; /* Slightly narrower form, wider table */
-    gap: 25px;
-}
-/* Form Styling */
-.register-patient-card h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-.register-patient-card .icon {
-    margin-right: 8px;
-    color: var(--primary-color);
-}
-.registration-form label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 5px;
-}
-.input-group {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-.form-field {
-    flex: 1;
-}
-.form-field.full-width {
-    flex: none; /* Override flex: 1 for full width fields */
-    width: 100%;
-}
-/* Ensure input fields fit the compact form space */
-#registration-form input,
-#registration-form select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background-color: #ffffff;
-    font-size: 14px;
-}
-.add-patient-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-.add-patient-btn:hover {
-    background-color: #6a5acd;
-}
-
-/* --- Patient Queue Table Styling --- */
-.patient-queue-card h2 { 
-    font-size: 18px; 
-    margin-bottom: 20px; 
-    font-weight: 700; 
-    color: var(--primary-color);
-}
-.queue-controls { 
-    display: flex; 
-    flex-wrap: wrap; /* Added flex-wrap for mobile layout */
-    gap: 10px; 
-    margin-bottom: 15px; 
-    align-items: center;
-}
-.queue-controls input, .queue-controls select {
-    padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 6px;
-    background-color: #ffffff; font-size: 14px;
-}
-.queue-controls input { flex: 2; min-width: 150px; } /* Adjusted for better mobile behavior */
-.queue-controls select { flex: 1; min-width: 120px; }
-
-/* >>> CRITICAL FOR HORIZONTAL SCROLL ON MOBILE <<< */
-.table-scroll { overflow-x: auto; } 
-.queue-table {
-    width: 100%; border-collapse: collapse; font-size: 14px; min-width: 900px; /* Forces table width */
-}
-
-.queue-table th, .queue-table td {
-    padding: 12px 10px; text-align: left; border-bottom: 1px solid #f0f0f0; white-space: nowrap;
-}
-.queue-table th { 
-    color: var(--text-light); 
-    font-weight: 600; 
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-}
-.tag {
-    padding: 4px 8px; border-radius: 15px; /* Pill shape for tags */
-    font-weight: 600; font-size: 12px; display: inline-block;
-}
-/* Priority tags */
-.tag.emergency { background-color: #fce6e8; color: var(--emergency-bg); }
-.tag.urgent { background-color: #fffae6; color: #ffbf00; }
-.tag.normal { background-color: #e6f7ff; color: #1890ff; }
-.tag.low { background-color: #f0f0f0; color: #555555; }
-/* Status tags */
-.tag.status-waiting { background-color: var(--waiting-bg); color: var(--waiting-color); }
-.tag.status-inprogress { background-color: var(--inprogress-bg); color: var(--inprogress-color); }
-.tag.status-completed { background-color: var(--completed-bg); color: var(--completed-color); }
-
-/* Action Buttons */
-.action-btns button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #888;
-    margin-left: 5px; /* Adjusted margin */
-    font-size: 16px;
-    transition: color 0.2s, transform 0.2s;
-}
-.action-btns button:hover {
-    color: var(--primary-color);
-    transform: scale(1.1);
-}
-
-
-/* =======================================================
-    7. DESKTOP/LARGE TABLET MEDIA QUERIES
-    ======================================================= */
-@media (min-width: 768px) {
-    /* Navbar Desktop */
-    .menu-toggle { display: none; }
-    header { padding: 15px 40px; }
-    .nav-links {
-        position: static; transform: translateX(0); height: auto;
-        flex-direction: row; width: auto; background-color: transparent;
-        display: flex !important; 
+    .container {
+        max-width: 1300px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: 30% 68%;
+        gap: 2%;
     }
-    .nav-links li { margin: 0; }
-    .nav-links a { font-size: 1em; padding: 5px 10px; }
 
-    /* Dashboard Header Desktop */
-    .dashboard-container { margin: 0 40px; }
-    .dashboard-header-area {
-        flex-direction: column; justify-content: flex-start; align-items: flex-start;
-    }
-    .dashboard-title { font-size: 32px; }
-    .status-indicators-group { flex-wrap: nowrap; gap: 12px; }
-
-    /* Main Content Desktop */
-    .dashboard-main-content { margin: 0 40px 40px 40px; }
-}
-
-/* =======================================================
-    8. MOBILE MEDIA QUERIES (Hamburger Logic & Layout Stacking)
-    ======================================================= */
-@media (max-width: 768px) {
-    /* Mobile Menu Display (Hamburger) */
-    header { padding: 15px 20px; }
-    .nav-links {
-        display: none; 
-        position: absolute;
-        top: 60px; 
-        right: 0;
-        flex-direction: column;
-        background-color: var(--header-dark);
-        width: 250px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    .card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         padding: 20px;
-        border-radius: 0 0 8px 8px;
-        transition: transform 0.3s ease-in-out;
-        transform: translateX(100%); 
-    }
-    .nav-links.open {
-        display: flex;
-        transform: translateX(0); 
-    }
-    .menu-toggle { display: flex; }
-    
-    .dashboard-container, .dashboard-main-content {
-        margin: 0 10px; 
-    }
-    
-    /* Metric Grid Stacking for small screens */
-    .dashboard-grid {
-        grid-template-columns: 1fr; 
     }
 
-    /* Queue Controls Layout */
-    .queue-controls input, .queue-controls select {
-        flex: 1 1 100%; /* Make filter controls full width */
-        min-width: unset;
+    .card h3 {
+        color: #2d2a8c;
+        margin-bottom: 15px;
     }
+
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    button {
+        background-color: #4B3BA8;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #3b3092;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f8;
+        color: #333;
+    }
+
+    .queue-section {
+        margin-bottom: 30px;
+    }
+
+    .queue-section h4 {
+        color: #4B3BA8;
+        margin-bottom: 10px;
+    }
+
+    .empty {
+        text-align: center;
+        color: gray;
+        padding: 10px;
+    }
+
+    .status-dropdown {
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #fff;
 }
 
-@media (max-width: 1000px) {
-    /* Queue Grid Stacking */
-    .queue-layout-grid {
-        grid-template-columns: 1fr; 
-    }
+.status-dropdown option[value="Waiting"] {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.status-dropdown option[value="Treated"] {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.status-dropdown option[value="Completed"] {
+  background-color: #d4edda;
+  color: #155724;
 }
 
-@media (max-width: 900px) {
-    /* Metrics Grid Adaptation */
-    .dashboard-grid {
-        grid-template-columns: repeat(2, 1fr); 
-    }
-    /* Priority Dashboard Stacking */
-    .priority-dashboard-layout {
-        grid-template-columns: 1fr; 
-    }
-}
-@media (max-width: 500px) {
-    .metric-icon-bg {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-    }
-    .metric-value {
-        font-size: 28px;
-    }
-    .metric-title {
-        font-size: 13px;
-    }
+.action-icons {
+  text-align: center;
 }
 
-/* ===========================
-   Live Dashboard Button
-=========================== */
-.live-btn {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
+.action-icons i {
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
+  margin: 0 6px;
+  color: #555;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
-.live-btn:hover {
-  background-color: #6a5acd;
-  transform: scale(1.05);
+.action-icons i:hover {
+  color: #007bff;
+}
+
+/* status bar */
+.dashboard-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.card-summary {
+  flex: 1;
+  min-width: 160px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  transition: transform 0.2s ease;
+}
+
+.card-summary:hover {
+  transform: translateY(-4px);
+}
+
+.card-summary p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.card-summary h2 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  color: #222;
+}
+
+.icon {
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon.purple {
+  background-color: rgba(128, 0, 255, 0.1);
+  color: #8000ff;
+}
+
+.icon.yellow {
+  background-color: rgba(255, 200, 0, 0.1);
+  color: #f4b400;
+}
+
+.icon.violet {
+  background-color: rgba(150, 100, 255, 0.1);
+  color: #9b59b6;
+}
+
+.icon.green {
+  background-color: rgba(0, 200, 100, 0.1);
+  color: #27ae60;
 }
