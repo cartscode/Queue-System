@@ -72,22 +72,31 @@
 
 <div class="container">
   <!-- Register Form -->
-  <div class="card">
-    <h3>➕ Register New Patient</h3>
-    <label>Patient Name</label>
-    <input type="text" id="patientName" placeholder="Enter full name">
-    <label>Age</label>
-    <input type="number" id="patientAge" placeholder="Enter age">
-    <label>Chief Complaint/Condition</label>
-    <input type="text" id="patientCondition" placeholder="e.g., Severe headache, Sprained ankle">
-    <label>Patient Type</label>
-    <select id="patientType">
-      <option value="regular">Regular patient</option>
-      <option value="priority">Priority patient</option>
-    </select>
-    <button onclick="addPatient()">Add Patient to Queue</button>
-    <button onclick="goToDashboard()">Live Dashboard</button>
-  </div>
+<div class="card">
+  <h3>➕ Register New Patient</h3>
+  
+    <form id="patientForm" method="POST" action="database.php">
+      <label>Patient Name</label>
+      <input type="text" name="name" id="patientName" placeholder="Enter full name" required>
+
+      <label>Age</label>
+      <input type="number" name="age" id="patientAge" placeholder="Enter age" required>
+
+      <label>Chief Complaint/Condition</label>
+      <input type="text" name="condition" id="patientCondition" placeholder="e.g., Severe headache, Sprained ankle" required>
+
+      <label>Patient Type</label>
+      <select name="type" id="patientType" required>
+        <option value="regular">Regular patient</option>
+        <option value="priority">Priority patient</option>
+      </select>
+
+      <button type="submit">Add Patient to Queue</button>
+    </form>
+
+  <button onclick="goToDashboard()">Live Dashboard</button>
+</div>
+
 
   <!-- Queues Display -->
   <div>
@@ -135,8 +144,6 @@
 
 <script src="scriptinfo.js">
 </script>
-
-
 
 </body>
 </html>

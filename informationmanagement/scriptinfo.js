@@ -6,7 +6,42 @@ const regularQueue = [];
 const priorityQueue = [];
 const allPatients = [];
 
-function addPatient() {
+// === Load existing patients  from DB TO TABLE ===
+async function loadPatients() {
+  try {
+    const response = await fetch("fetch_patients.php");
+    const patients = await response.json();
+
+    regularQueue.length = 0;
+    priorityQueue.length = 0;
+
+    patients.forEach(patient => {
+      const patientData = {
+        name: patient.name,
+        age: patient.age,
+        condition: patient.condition_text,
+        time: new Date(patient.registered_time).toLocaleTimeString(),
+        status: patient.status
+      };
+
+      if (patient.type === "regular") {
+        regularQueue.push(patientData);
+      } else {
+        priorityQueue.push(patientData);
+      }
+    });
+
+    renderQueue("regular");
+    renderQueue("priority");
+    updateDashboard();
+
+  } catch (error) {
+    console.error("Error loading patients:", error);
+  }
+}
+
+// === Add patient to DB and refresh ===
+async function addPatient() {
   const name = document.getElementById("patientName").value.trim();
   const age = document.getElementById("patientAge").value.trim();
   const condition = document.getElementById("patientCondition").value.trim();
@@ -17,37 +52,39 @@ function addPatient() {
     return;
   }
 
-  const patient = {
-    name,
-    age,
-    condition,
-    time: new Date().toLocaleTimeString(),
-    status: "Waiting",
-    waitStart: Date.now()
-  };
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("age", age);
+  formData.append("condition", condition);
+  formData.append("type", type);
 
-  if (type === "regular") {
-    regularQueue.push(patient);
-    renderQueue("regular");
-  } else {
-    priorityQueue.push(patient);
-    renderQueue("priority");
+  // FOR DATABASE INSERTION OF INFORMATION
+  try {
+    const response = await fetch("database.php", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.text();
+    if (result.includes("success")) {
+      alert("✅ Patient added successfully!");
+      await loadPatients(); // reload the table
+      document.getElementById("patientForm").reset();
+    } else {
+      alert("❌ Error adding patient.");
+    }
+
+  } catch (error) {
+    console.error("Error adding patient:", error);
   }
-
-  addToStorage(patient, type);
-  updateDashboard();
-
-  document.getElementById("patientName").value = "";
-  document.getElementById("patientAge").value = "";
-  document.getElementById("patientCondition").value = "";
 }
 
-// Render table rows
+// === Render table rows ===
 function renderQueue(type) {
   const queue = type === "regular" ? regularQueue : priorityQueue;
   const tbody = document.getElementById(type + "QueueBody");
-
   tbody.innerHTML = "";
+
   if (queue.length === 0) {
     tbody.innerHTML = `<tr><td colspan="7" class="empty">Queue is empty...</td></tr>`;
     return;
@@ -75,7 +112,6 @@ function renderQueue(type) {
   updateDashboard();
 }
 
-// Get color class for badge
 function getStatusClass(status) {
   switch (status) {
     case "Waiting": return "status-waiting";
@@ -85,7 +121,6 @@ function getStatusClass(status) {
   }
 }
 
-// Actions
 function assignDoctor(type, index) {
   const queue = type === "regular" ? regularQueue : priorityQueue;
   queue[index].status = "Being Treated";
@@ -104,20 +139,6 @@ function removePatient(type, index) {
   renderQueue(type);
 }
 
-function addToStorage(patient, type) {
-  const record = {
-    id: `${type === "regular" ? "R" : "P"}-${allPatients.length + 1}`,
-    name: patient.name,
-    age: patient.age,
-    condition: patient.condition,
-    type: type,
-    status: patient.status,
-    registeredAt: new Date().toLocaleString()
-  };
-  allPatients.push(record);
-}
-
-// Dashboard Summary
 function updateDashboard() {
   const total = regularQueue.length + priorityQueue.length;
   const waiting = [...regularQueue, ...priorityQueue].filter(p => p.status === "Waiting").length;
@@ -136,7 +157,7 @@ function updateDashboard() {
   document.getElementById("inProgress").innerText = inProgress;
   document.getElementById("avgWait").innerText = avgWait;
 }
-// Toggle mobile menu
+
 const toggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
 
@@ -144,4 +165,6 @@ toggle.addEventListener("click", () => {
   toggle.classList.toggle("active");
   navLinks.classList.toggle("show");
 });
-setInterval(updateDashboard, 5000);
+
+window.onload = loadPatients;
+setInterval(loadPatients, 5000); // auto-refresh table every 5 seconds
