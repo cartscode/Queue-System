@@ -1,4 +1,4 @@
-testing apache
+testing apache if running!
 <?php
 phpinfo();
 ?>
@@ -20,6 +20,13 @@ CREATE TABLE patients (
     age INT(3),
     condition_text VARCHAR(255),
     type VARCHAR(50),
-    registered_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    registered_time TIMESTA MP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(20) DEFAULT 'Waiting'
 );
+
+_________________________________________________________________________________
+things I need to fix -carter
+
+1.Delete btn in table functional connected to database
+2.average time waiting clock fix It.
+3.remove refresh every 5scs

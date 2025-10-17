@@ -103,10 +103,12 @@ function renderQueue(type) {
         <td class="action-icons">
           <i class="fa-solid fa-user-doctor" title="Assign Doctor" onclick="assignDoctor('${type}', ${index})"></i>
           <i class="fa-solid fa-check" title="Mark as Completed" onclick="markDone('${type}', ${index})"></i>
+    
           <i class="fa-solid fa-trash" title="Remove Patient" onclick="removePatient('${type}', ${index})"></i>
         </td>
       </tr>
     `;
+    // remove/delete function connect to database 
     tbody.innerHTML += row;
   });
   updateDashboard();
@@ -155,6 +157,7 @@ function updateDashboard() {
   document.getElementById("totalPatients").innerText = total;
   document.getElementById("waitingPatients").innerText = waiting;
   document.getElementById("inProgress").innerText = inProgress;
+  // fix the time av waiting
   document.getElementById("avgWait").innerText = avgWait;
 }
 
