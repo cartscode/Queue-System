@@ -23,7 +23,7 @@ async function loadPatients() {
         time: new Date(patient.registered_time).toLocaleTimeString(),
         status: patient.status
       };
-
+// test
       if (patient.type === "regular") {
         regularQueue.push(patientData);
       } else {
