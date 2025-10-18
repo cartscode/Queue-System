@@ -27,6 +27,6 @@ CREATE TABLE patients (
 _________________________________________________________________________________
 things I need to fix -carter
 
-1.Delete btn in table functional connected to database
-2.average time waiting clock fix It.
-3.remove refresh every 5scs
+1.Delete btn in table functional connected to database ✔️
+2.average time waiting clock fix It. ✔️
+3.remove refresh every 5scs ✔️

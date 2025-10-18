@@ -17,6 +17,7 @@ async function loadPatients() {
 
     patients.forEach(patient => {
       const patientData = {
+        id: patient.id,
         name: patient.name,
         age: patient.age,
         condition: patient.condition_text,
@@ -135,11 +136,32 @@ function markDone(type, index) {
   renderQueue(type);
 }
 
-function removePatient(type, index) {
+async function removePatient(type, index) {
   const queue = type === "regular" ? regularQueue : priorityQueue;
-  queue.splice(index, 1);
-  renderQueue(type);
+  const patient = queue[index];
+
+  if (!confirm(`Are you sure you want to remove ${patient.name}?`)) return;
+
+  try {
+    const response = await fetch("delete_patient.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "id=" + encodeURIComponent(patient.id)
+    });
+
+    const result = await response.text();
+
+    if (result.includes("success")) {
+      alert("🗑️ Patient removed successfully!");
+      await loadPatients(); // reload data after deletion
+    } else {
+      alert("❌ Failed to delete patient: " + result);
+    }
+  } catch (error) {
+    console.error("Error deleting patient:", error);
+  }
 }
+
 
 function updateDashboard() {
   const total = regularQueue.length + priorityQueue.length;
