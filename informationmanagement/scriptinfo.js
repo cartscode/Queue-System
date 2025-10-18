@@ -192,4 +192,3 @@ toggle.addEventListener("click", () => {
 });
 
 window.onload = loadPatients;
-setInterval(loadPatients, 5000); // auto-refresh table every 5 seconds
