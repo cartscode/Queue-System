@@ -6,13 +6,15 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "hospital_queuedb";
+
 // FOR DISPLAY INFO IN THE TABLE
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-$sql = "SELECT * FROM patients ORDER BY id DESC";
+// ✅ Use ASC so oldest patients appear first (FIFO order)
+$sql = "SELECT * FROM patients ORDER BY id ASC";
 $result = $conn->query($sql);
 
 $patients = [];

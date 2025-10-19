@@ -27,6 +27,11 @@ CREATE TABLE patients (
 _________________________________________________________________________________
 things I need to fix -carter
 
+
 1.Delete btn in table functional connected to database ✔️
 2.average time waiting clock fix It. ✔️
 3.remove refresh every 5scs ✔️
+4.Fixed FIFO logic in the table✔️
+5.Vertical & HOrizontal scrollbar
+6.Action function bug(it should change the attribute in database when it clicks)
+7.
