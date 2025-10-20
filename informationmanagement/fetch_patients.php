@@ -6,7 +6,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "hospital_queuedb";
-// FOR DISPLAY INFO IN THE TABLE
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
@@ -16,7 +16,7 @@ $sql = "SELECT * FROM patients ORDER BY id DESC";
 $result = $conn->query($sql);
 
 $patients = [];
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $patients[] = $row;
     }

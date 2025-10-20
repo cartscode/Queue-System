@@ -5,13 +5,14 @@ function goToDashboard() {
 const regularQueue = [];
 const priorityQueue = [];
 const allPatients = [];
-
 // === Load existing patients  from DB TO TABLE ===
 async function loadPatients() {
   try {
-    const response = await fetch("fetch_patients.php");
-    const patients = await response.json();
+    const res = await fetch("fetch_patients.php");
+    if (!res.ok) throw new Error("Network response not ok: " + res.status);
+    const patients = await res.json();
 
+    // clear queues
     regularQueue.length = 0;
     priorityQueue.length = 0;
 
@@ -21,10 +22,11 @@ async function loadPatients() {
         age: patient.age,
         condition: patient.condition_text,
         time: new Date(patient.registered_time).toLocaleTimeString(),
-        status: patient.status
+        status: patient.status,
+        type: patient.type // keep type so you can split regular/priority
       };
 
-      if (patient.type === "regular") {
+      if ((patient.type || '').toLowerCase() === "regular") {
         regularQueue.push(patientData);
       } else {
         priorityQueue.push(patientData);
@@ -52,6 +54,7 @@ async function addPatient() {
     return;
   }
 
+
   const formData = new FormData();
   formData.append("name", name);
   formData.append("age", age);
@@ -59,24 +62,28 @@ async function addPatient() {
   formData.append("type", type);
 
   // FOR DATABASE INSERTION OF INFORMATION
-  try {
-    const response = await fetch("database.php", {
-      method: "POST",
-      body: formData
-    });
+ async function addPatient() {
+  // ... gather formData earlier ...
+    try {
+      const res = await fetch("database.php", {
+        method: "POST",
+        body: formData
+      });
 
-    const result = await response.text();
-    if (result.includes("success")) {
-      alert("✅ Patient added successfully!");
-      await loadPatients(); // reload the table
-      document.getElementById("patientForm").reset();
-    } else {
-      alert("❌ Error adding patient.");
+      const resultText = await res.text();
+      if (resultText.includes("success")) {
+        alert("✅ Patient added successfully!");
+        await loadPatients(); // reload the table
+        document.getElementById("patientForm").reset();
+      } else {
+        alert("❌ Error adding patient.");
+        console.error("Add patient response:", resultText);
+      }
+    } catch (error) {
+      console.error("Error adding patient:", error);
     }
-
-  } catch (error) {
-    console.error("Error adding patient:", error);
   }
+
 }
 
 // === Render table rows ===
@@ -171,3 +178,4 @@ toggle.addEventListener("click", () => {
 
 window.onload = loadPatients;
 setInterval(loadPatients, 5000); // auto-refresh table every 5 seconds
+
