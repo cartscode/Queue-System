@@ -20,7 +20,7 @@ CREATE TABLE patients (
     age INT(3),
     condition_text VARCHAR(255),
     type VARCHAR(50),
-    registered_time TIMESTA MP DEFAULT CURRENT_TIMESTAMP,
+    registered_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(20) DEFAULT 'Waiting'
 );
 
@@ -33,5 +33,5 @@ things I need to fix(Langaw sa source code) -carter
 3.remove refresh every 5scs ✔️
 4.Fixed FIFO logic in the table✔️
 5.Vertical & HOrizontal scrollbar (UI)
-6.Action function bug(it should change the attribute in database when it clicks)
+6.Action function bug(it should change the attribute in database when it clicks)(priority)
 7.
