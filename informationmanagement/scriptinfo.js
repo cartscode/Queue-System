@@ -7,41 +7,67 @@ const priorityQueue = [];
 const allPatients = [];
 // === Load existing patients  from DB TO TABLE ===
 async function loadPatients() {
-  try {
-    const res = await fetch("fetch_patients.php");
-    if (!res.ok) throw new Error("Network response not ok: " + res.status);
-    const patients = await res.json();
+    try {
+        const response = await fetch("fetch_patients.php");
+        const patients = await response.json();
 
-    // clear queues
-    regularQueue.length = 0;
-    priorityQueue.length = 0;
+        const regularBody = document.querySelector("#regularQueueBody");
+        const priorityBody = document.querySelector("#priorityQueueBody");
 
-    patients.forEach(patient => {
-      const patientData = {
-        name: patient.name,
-        age: patient.age,
-        condition: patient.condition_text,
-        time: new Date(patient.registered_time).toLocaleTimeString(),
-        status: patient.status,
-        type: patient.type // keep type so you can split regular/priority
-      };
+        // Clear current table rows
+        regularBody.innerHTML = "";
+        priorityBody.innerHTML = "";
 
-      if ((patient.type || '').toLowerCase() === "regular") {
-        regularQueue.push(patientData);
-      } else {
-        priorityQueue.push(patientData);
-      }
-    });
+        let totalPatients = 0;
+        let waitingCount = 0;
+        let inProgressCount = 0;
 
-    renderQueue("regular");
-    renderQueue("priority");
-    updateDashboard();
+        patients.forEach(p => {
+            totalPatients++;
+            if (p.status === "Waiting") waitingCount++;
+            if (p.status === "In Progress") inProgressCount++;
 
-  } catch (error) {
-    console.error("Error loading patients:", error);
-  }
+            const row = `
+                <tr>
+                    <td>${p.id}</td>
+                    <td>${p.name}</td>
+                    <td>${p.age}</td>
+                    <td>${p.condition_text}</td>
+                    <td>${p.registered_time}</td>
+                    <td>${p.status}</td>
+                    <td>
+                        <button onclick="updateStatus(${p.id}, 'In Progress')">Start</button>
+                        <button onclick="updateStatus(${p.id}, 'Completed')">Complete</button>
+                    </td>
+                </tr>
+            `;
+
+            if (p.type === "Priority") priorityBody.innerHTML += row;
+            else regularBody.innerHTML += row;
+        });
+
+        document.getElementById("totalPatients").textContent = totalPatients;
+        document.getElementById("waitingPatients").textContent = waitingCount;
+        document.getElementById("inProgress").textContent = inProgressCount;
+
+    } catch (error) {
+        console.error("Error loading patients:", error);
+    }
 }
 
+// Refresh every 5 seconds
+setInterval(loadPatients, 5000);
+loadPatients();
+
+// Update patient status function
+async function updateStatus(id, status) {
+    try {
+        await fetch(`update_status.php?id=${id}&status=${status}`);
+        loadPatients();
+    } catch (error) {
+        console.error(error);
+    }
+}
 // === Add patient to DB and refresh ===
 async function addPatient() {
   const name = document.getElementById("patientName").value.trim();

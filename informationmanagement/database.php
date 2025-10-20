@@ -1,33 +1,39 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
+// Database connection
 $servername = "localhost";
-$username = "root";
+$username = "root"; // default XAMPP
 $password = "";
-$dbname = "hospital_queuedb";
+$dbname = "hospital_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $age = $_POST['age'];
-    $condition = $_POST['condition'];
-    $type = $_POST['type'];
+// Get POST data
+$name = $_POST['name'];
+$age = $_POST['age'];
+$condition = $_POST['condition'];
+$type = $_POST['type']; // "regular" or "priority"
 
-    $stmt = $conn->prepare("INSERT INTO patients (name, age, condition_text, type) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("siss", $name, $age, $condition, $type);
+// Convert type to proper capitalization for consistency
+$type = ucfirst(strtolower($type));
 
-    if ($stmt->execute()) {
-        echo "success";
-    } else {
-        echo "error";
-    }
+// Default status
+$status = "Waiting";
 
-    $stmt->close();
+// Insert patient
+$sql = "INSERT INTO patients (name, age, condition_text, type, status) 
+        VALUES ('$name', '$age', '$condition', '$type', '$status')";
+
+if ($conn->query($sql) === TRUE) {
+    // Redirect back to the dashboard after adding
+    header("Location: index.html");
+    exit();
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
