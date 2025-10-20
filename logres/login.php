@@ -38,7 +38,7 @@ if (isset($_POST['login'])) {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['email'] = $email;
-        header("Location: /Queue-System-main/informationmanagement/informationmanagement.html");
+        header("Location: /Project in CC105/informationmanagement/informationmanagement.html");
         exit;
     } else {
         $message = "Invalid email or password!";
@@ -82,7 +82,7 @@ if (isset($_POST['login'])) {
             <a class="navbar-brand fw-bold">HealthCare+</a>
 
             <div class="ms-auto">
-                <a href="/Queue-System-main/home/index.html" class="btn btn-login fw-bold">Back To Home</a>
+                <a href="\Project in CC105\home\index.html" class="btn btn-login fw-bold">Back To Home</a>
             </div>
         </div>
     </nav>
@@ -192,7 +192,7 @@ function validateRegister(event) {
 
 function goToDashboard(event) {
   event.preventDefault();
-  window.location.href = "/Queue-System-main/informationmanagement/informationmanagement.html";
+  window.location.href = "\Project in CC105\informationmanagement\Informationmanagement.html";
 }
 
 // ---- Hospital Walk Animation ----
