@@ -1,0 +1,24 @@
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.6s ease-in-out; }
+    .priority-tab { background-color: #dc2626; color: white; box-shadow: 0 0 10px rgba(239,68,68,0.5); }
+
+    .status-waiting { background: #d1fae5; color: #065f46; }
+    .status-treated { background: #fef3c7; color: #92400e; }
+    .status-completed { background: #dbeafe; color: #1e40af; }
+
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; text-align: left; }
+    tr:nth-child(even) { background-color: #f9fafb; }
+
+    .table-container { overflow-x: auto; }

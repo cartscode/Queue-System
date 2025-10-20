@@ -1,73 +1,70 @@
+// TAB SWITCHING
+const tabRegular = document.getElementById("tab-regular");
+const tabPriority = document.getElementById("tab-priority");
+const sectionRegular = document.getElementById("regular-section");
+const sectionPriority = document.getElementById("priority-section");
 
-// Initialize Lucide icons on load
-lucide.createIcons();
+tabRegular.addEventListener("click", () => {
+  sectionRegular.classList.remove("hidden");
+  sectionPriority.classList.add("hidden");
+  tabRegular.classList.add("bg-purple-600", "text-white");
+  tabPriority.classList.remove("priority-tab");
+});
 
-// Get elements
-const dashboardContainer = document.getElementById('dashboard-container');
-const regularTemplate = document.getElementById('regular-template');
-const priorityTemplate = document.getElementById('priority-template');
-const tabRegular = document.getElementById('tab-regular');
-const tabPriority = document.getElementById('tab-priority');
+tabPriority.addEventListener("click", () => {
+  sectionRegular.classList.add("hidden");
+  sectionPriority.classList.remove("hidden");
+  tabRegular.classList.remove("bg-purple-600", "text-white");
+  tabPriority.classList.add("priority-tab");
+});
 
-// Define state classes for smooth transition
-const ACTIVE_CLASSES = ['bg-purple-700', 'text-white', 'shadow-xl', 'hover:bg-purple-800', 'border-transparent'];
-const INACTIVE_CLASSES = ['bg-white', 'text-gray-700', 'border', 'border-gray-300', 'shadow-md', 'hover:bg-gray-100'];
+// ✅ FETCH DATA FROM PHP + MYSQL
+async function loadPatients() {
+  try {
+    const response = await fetch("fetch_patients.php");
+    if (!response.ok) throw new Error("Failed to fetch patient data");
 
+    const patients = await response.json();
+    const regularBody = document.querySelector("#regularQueueBody");
+    const priorityBody = document.querySelector("#priorityQueueBody");
 
-/**
- * Switches the content displayed in the dashboard container and manages button styles.
- * @param {string} view - The view to display ('regular' or 'priority').
- */
-function showDashboard(view) {
-    // 1. Clear existing content
-    dashboardContainer.innerHTML = '';
-    
-    // 2. Clone and append new content based on the view
-    if (view === 'regular') {
-        const clone = regularTemplate.content.cloneNode(true);
-        dashboardContainer.appendChild(clone);
-        
-        // 3. Update active button styles for REGULAR tab
-        // Remove inactive classes and add active classes to Regular tab
-        tabRegular.classList.remove(...INACTIVE_CLASSES);
-        tabRegular.classList.add(...ACTIVE_CLASSES);
-        
-        // Remove active classes and add inactive classes to Priority tab
-        tabPriority.classList.remove(...ACTIVE_CLASSES);
-        tabPriority.classList.add(...INACTIVE_CLASSES);
+    regularBody.innerHTML = "";
+    priorityBody.innerHTML = "";
 
-        // Ensure the icon in the regular tab is white (from the ACTIVE_CLASSES)
-        const regularIcon = tabRegular.querySelector('[data-lucide="users"]');
-        if(regularIcon) regularIcon.classList.remove('text-red-600'); 
-    
-    } else if (view === 'priority') {
-        const clone = priorityTemplate.content.cloneNode(true);
-        dashboardContainer.appendChild(clone);
-        
-        // 3. Update active button styles for PRIORITY tab
-        // Remove inactive classes and add active classes to Priority tab
-        tabPriority.classList.remove(...INACTIVE_CLASSES);
-        tabPriority.classList.add(...ACTIVE_CLASSES);
+    let totalPatients = 0;
+    let waitingCount = 0;
 
-        // Remove active classes and add inactive classes to Regular tab
-        tabRegular.classList.remove(...ACTIVE_CLASSES);
-        tabRegular.classList.add(...INACTIVE_CLASSES);
+    patients.forEach(p => {
+      totalPatients++;
+      if (p.status === "Waiting") waitingCount++;
 
-        // Ensure the icon in the priority tab is white (from the ACTIVE_CLASSES)
-        const priorityIcon = tabPriority.querySelector('[data-lucide="wheelchair"]');
-        if(priorityIcon) priorityIcon.classList.add('text-white');
-    }
+      const row = `
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td>${p.age}</td>
+          <td>${p.condition_text}</td>
+          <td>${p.type}</td>
+          <td>${p.registered_time}</td>
+          <td><span class="status-badge status-${p.status.toLowerCase()}">${p.status}</span></td>
+        </tr>
+      `;
 
-    // 4. Re-initialize icons for the newly injected content
-    lucide.createIcons();
+      // 👇 Case-insensitive match for priority
+      if (p.type.toLowerCase() === "priority") {
+        priorityBody.innerHTML += row;
+      } else {
+        regularBody.innerHTML += row;
+      }
+    });
+
+    document.getElementById("totalPatients").textContent = totalPatients;
+    document.getElementById("waitingPatients").textContent = waitingCount;
+  } catch (error) {
+    console.error("Error loading patients:", error);
+  }
 }
 
-// Load the regular dashboard on initial page load
-window.onload = () => {
-        // Re-initialize icons from the main document (nav bar)
-    lucide.createIcons();
-    // Manually set initial state for smooth transition on first load
-    tabRegular.classList.add(...ACTIVE_CLASSES);
-    tabPriority.classList.add(...INACTIVE_CLASSES);
-    showDashboard('regular');
-};
+// Refresh every 5 seconds
+setInterval(loadPatients, 5000);
+loadPatients();
