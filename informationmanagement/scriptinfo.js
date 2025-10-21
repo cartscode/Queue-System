@@ -229,3 +229,4 @@ toggle.addEventListener("click", () => {
 });
 
 window.onload = loadPatients;
+
