@@ -124,17 +124,54 @@ function getStatusClass(status) {
   }
 }
 
-function assignDoctor(type, index) {
+async function assignDoctor(type, index) {
   const queue = type === "regular" ? regularQueue : priorityQueue;
-  queue[index].status = "Being Treated";
-  renderQueue(type);
+  const patient = queue[index];
+
+  try {
+    const response = await fetch("update_status.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `id=${encodeURIComponent(patient.id)}&status=${encodeURIComponent("Being Treated")}`
+    });
+
+    const result = await response.text();
+    if (result.includes("success")) {
+      queue[index].status = "Being Treated";
+      renderQueue(type);
+      alert(`👨‍⚕️ ${patient.name} is now being treated.`);
+    } else {
+      alert("❌ Failed to update status.");
+    }
+  } catch (error) {
+    console.error("Error updating status:", error);
+  }
 }
 
-function markDone(type, index) {
+async function markDone(type, index) {
   const queue = type === "regular" ? regularQueue : priorityQueue;
-  queue[index].status = "Completed";
-  renderQueue(type);
+  const patient = queue[index];
+
+  try {
+    const response = await fetch("update_status.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `id=${encodeURIComponent(patient.id)}&status=${encodeURIComponent("Completed")}`
+    });
+
+    const result = await response.text();
+    if (result.includes("success")) {
+      queue[index].status = "Completed";
+      renderQueue(type);
+      alert(`✅ ${patient.name}'s treatment completed.`);
+    } else {
+      alert("❌ Failed to update status.");
+    }
+  } catch (error) {
+    console.error("Error updating status:", error);
+  }
 }
+
 
 async function removePatient(type, index) {
   const queue = type === "regular" ? regularQueue : priorityQueue;
@@ -192,3 +229,4 @@ toggle.addEventListener("click", () => {
 });
 
 window.onload = loadPatients;
+
