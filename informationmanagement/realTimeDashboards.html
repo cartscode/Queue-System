@@ -13,81 +13,56 @@
   <div class="max-w-6xl mx-auto p-6 fade-in">
     <h1 class="text-2xl font-bold text-center mb-6">Real-Time Patient Flow Management</h1>
 
-    <!-- Tabs -->
-    <div class="flex justify-center mb-8">
-      <button id="tab-regular" class="px-6 py-2 bg-purple-600 text-white font-semibold rounded-l-lg shadow-md transition duration-300 hover:scale-105">
-        Regular Patient Queue (Triage)
-      </button>
-      <button id="tab-priority" class="px-6 py-2 priority-tab font-semibold rounded-r-lg shadow-md transition duration-300 hover:scale-105">
-        Priority Patient Queue (FIFO)
-      </button>
+    <!-- Dashboards Side by Side -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Regular Queue Dashboard -->
+      <section id="regular-section" class="text-center">
+        <h2 class="text-lg font-semibold mb-3 text-gray-700">Regular Patient Queue</h2>
+        <div class="bg-white rounded-xl shadow overflow-hidden table-container inline-block text-left">
+          <table>
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Condition</th>
+                <th>Registered Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="regularQueueBody">
+              <tr><td colspan="6" class="text-center py-6 text-gray-500">Loading patients...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Priority Queue Dashboard -->
+      <section id="priority-section" class="fade-in text-center">
+        <h2 class="text-lg font-semibold mb-3 text-red-700">Priority Patient Queue</h2>
+        <div class="bg-white rounded-xl shadow overflow-hidden table-container inline-block text-left">
+          <table>
+            <thead class="bg-red-100 text-red-800">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Condition</th>
+                <th>Registered Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="priorityQueueBody">
+              <tr><td colspan="6" class="text-center py-6 text-gray-500">No priority patients yet...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
     </div>
-
-    <!-- Regular Queue Dashboard -->
-    <section id="regular-section">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-        <div class="bg-white p-4 rounded-xl shadow text-center">
-          <p class="text-sm text-gray-500">Total Patients</p>
-          <p id="totalPatients" class="text-3xl font-bold">0</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow text-center">
-          <p class="text-sm text-gray-500">Waiting in Queue</p>
-          <p id="waitingPatients" class="text-3xl font-bold">0</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow text-center">
-          <p class="text-sm text-gray-500">Currently Serving</p>
-          <p id="inProgress" class="text-3xl font-bold">0</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow text-center">
-          <p class="text-sm text-gray-500">Avg Wait Time</p>
-          <p id="avgWait" class="text-3xl font-bold text-gray-500">0 min</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow overflow-hidden table-container">
-        <table>
-          <thead class="bg-gray-100 text-gray-700">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Condition</th>
-              <th>Type</th>
-              <th>Registered Time</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="regularQueueBody">
-            <tr><td colspan="7" class="text-center py-6 text-gray-500">Loading patients...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Priority Queue Dashboard -->
-    <section id="priority-section" class="hidden fade-in">
-      <div class="bg-white rounded-xl shadow overflow-hidden table-container">
-        <table>
-          <thead class="bg-red-100 text-red-800">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Condition</th>
-              <th>Type</th>
-              <th>Registered Time</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="priorityQueueBody">
-            <tr><td colspan="7" class="text-center py-6 text-gray-500">No priority patients yet...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
   </div>
 
- <script src="realTimeDashboards.js"></script>
-  
+  <script src="realTimeDashboards.js"></script>
 </body>
 </html>
