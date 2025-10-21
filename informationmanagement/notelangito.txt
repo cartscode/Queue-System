@@ -32,6 +32,6 @@ things I need to fix(Langaw sa source code) -carter
 2.average time waiting clock fix It. ✔️
 3.remove refresh every 5scs ✔️
 4.Fixed FIFO logic in the table✔️
-5.Vertical & HOrizontal scrollbar (UI)
-6.Action function bug(it should change the attribute in database when it clicks)(priority)
+5.Vertical & HOrizontal scrollbar (UI) 
+6.Action function bug(it should change the attribute in database when it clicks)(priority)✔️
 7.
