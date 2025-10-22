@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "queue_system_db";
+$db = "hospital_queuedb";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 
