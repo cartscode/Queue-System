@@ -24,6 +24,7 @@ CREATE TABLE patients (
     status VARCHAR(20) DEFAULT 'Waiting'
 );
 
+
 _________________________________________________________________________________
 things I need to fix(Langaw sa source code) -carter
 
@@ -34,5 +35,6 @@ things I need to fix(Langaw sa source code) -carter
 4.Fixed FIFO logic in the table✔️
 5.Vertical & HOrizontal scrollbar (UI) 
 6.Action function bug(it should change the attribute in database when it clicks)(priority)✔️
-7.ContactForm bugs in UI responsive Hamburger
-8.
+7.ContactForm bugs in UI responsive Hamburger ✔️
+8.Bugs changing the link of btn register✔️
+9. We need to create another copy file for home,aboutus,contactus,services pages with changes of btn log out instead of register when it's already log in.
