@@ -34,4 +34,5 @@ things I need to fix(Langaw sa source code) -carter
 4.Fixed FIFO logic in the table✔️
 5.Vertical & HOrizontal scrollbar (UI) 
 6.Action function bug(it should change the attribute in database when it clicks)(priority)✔️
-7.
+7.ContactForm bugs in UI responsive Hamburger
+8.
