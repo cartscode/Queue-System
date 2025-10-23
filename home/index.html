@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hospital Homepage</title>
-    <link rel="icon" href="icons/hospital.png" type="image/png">
-    <link rel="stylesheet" href="homestyle.css">
-    
+  <link rel="icon" href="icons/hospital.png" type="image/png">
+  <link rel="stylesheet" href="homestyle.css">
+
   <!-- Bootstrap for responsive navbar -->
 </head>
+
 <body>
-<!-- Background Video -->
-<video autoplay muted loop id="bg-video">
-  <source src="moving animation/animation bg.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+  <!-- Background Video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="moving animation/animation bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
 
   <!-- =========================
        Navbar (Pure CSS Version)
   ========================== -->
-<header>
-  <nav class="navbar">
-    <a href="index.html" class="logo">HealthCare+</a>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">HealthCare+</a>
 
-    <!-- Hamburger -->
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+      <!-- Hamburger -->
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-    <ul class="nav-links" id="nav-links">
-   <li><a href="\Project in CC105\home\index.html">Home</a></li>
-      <li><a href="\Project in CC105\Services\services.html">Services</a></li>
-      <li><a href="\Project in CC105\aboutus\AboutUs.html">About Us</a></li>
-      <li><a href="\Project in CC105\ContactForm\ContactForm.html">Contact</a></li>
-      <li><a href="\Project in CC105\logres\login.php" class="register-btn">Register</a></li>
-    </ul>
-  </nav>
-</header>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../home/index.html">Home</a></li>
+        <li><a href="../Services/services.html">Services</a></li>
+        <li><a href="../aboutus/AboutUs.html">About Us</a></li>
+        <li><a href="../ContactForm/ContactForm.html">Contact</a></li>
+        <li><a href="../logres/login.php" class="register-btn">Register</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -47,68 +49,75 @@
       <div class="hero-content">
         <h1>Your Health, Our Priority</h1>
         <p>Providing trusted healthcare with compassion and care.</p>
-        <a href="/logres/login.html" class="btn">Login</a>
+        <a href="/logres/login.php" class="btn">Login</a>
       </div>
     </div>
   </section>
-<!-- Testimonials Section -->
-<section class="testimonials-section">
-  <div class="container">
-    <h2>What Our Patients Say?</h2>
-    <div class="testimonials-carousel" id="testimonials-carousel">
-      
-      <div class="testimonial-card">
-        <img src="\Project in CC105\home\icons\woman2.png" alt="Patient 1">
-        <h3>Jane Doe</h3>
-        <p>“Excellent service and caring staff. Highly recommend!”</p>
-        <div class="rating">⭐⭐⭐⭐⭐</div>
-      </div>
-      
-      <div class="testimonial-card">
-        <img src="\Project in CC105\home\icons\man2.png" alt="Patient 2">
-        <h3>John Smith</h3>
-        <p>“The doctors are professional and very attentive.”</p>
-        <div class="rating">⭐⭐⭐⭐⭐</div>
-      </div>
-      
-      <div class="testimonial-card">
-        <img src="\Project in CC105\home\icons\woman.png" alt="Patient 3">
-        <h3>Mary Johnson</h3>
-        <p>“Clean hospital, friendly staff, and quick service because of their system.”</p>
-        <div class="rating">⭐⭐⭐⭐⭐</div>
-      </div>
-            <div class="testimonial-card">
-        <img src="\Project in CC105\home\icons\man.png" alt="Patient 3">
-        <h3>Tony Spank</h3>
-        <p>“From the reception to the doctors, everyone was so friendly and helpful. It’s the best hospital experience I’ve ever had!”</p>
-        <div class="rating">⭐⭐⭐⭐⭐</div>
-      </div>
-    </div>
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h2>What Our Patients Say?</h2>
+      <div class="testimonials-carousel" id="testimonials-carousel">
 
-</div>
-  </div>
-</section>
+        <div class="testimonial-card">
+          <img src="../home/icons/woman2.png" alt="Patient 1">
+          <h3>Jane Doe</h3>
+          <p>“Excellent service and caring staff. Highly recommend!”</p>
+          <div class="rating">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="../home/icons/man2.png" alt="Patient 2">
+          <h3>John Smith</h3>
+          <p>“The doctors are professional and very attentive.”</p>
+          <div class="rating">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="../home/icons/woman.png" alt="Patient 3">
+          <h3>Mary Johnson</h3>
+          <p>“Clean hospital, friendly staff, and quick service because of their system.”</p>
+          <div class="rating">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="testimonial-card">
+          <img src="../home/icons/man.png" alt="Patient 3">
+          <h3>Tony Spank</h3>
+          <p>“From the reception to the doctors, everyone was so friendly and helpful. It’s the best hospital experience
+            I’ve ever had!”</p>
+          <div class="rating">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
   <!-- Footer -->
-<footer>
-  <div class="footer-container">
-    <div class="footer-contact">
-      <h3>Contact Us</h3>
-      <p>Email: <a href="mailto:info@healthcareplus.com">info@healthcareplus.com</a></p>
-      <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:info@healthcareplus.com">info@healthcareplus.com</a></p>
+        <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="icons/facebook.png" alt="Facebook"></a>
+        <a href="#"><img src="icons/twitter.png" alt="Twitter"></a>
+        <a href="#"><img src="icons/instagram.png" alt="Instagram"></a>
+        <a href="#"><img src="icons/linkedin.png" alt="LinkedIn"></a>
+      </div>
     </div>
-    <div class="footer-social">
-      <h3>Follow Us</h3>
-      <a href="#"><img src="icons\facebook.png" alt="Facebook"></a>
-      <a href="#"><img src="icons/twitter.png" alt="Twitter"></a>
-      <a href="#"><img src="icons/instagram.png" alt="Instagram"></a>
-      <a href="#"><img src="icons/linkedin.png" alt="LinkedIn"></a>
+    <p class="footer-copy">&copy; 2025 HealthCare+. All rights reserved.</p>
+  </footer>
+  <!-- Floating Feedback Button -->
+  <!-- Floating Feedback Button (now a hamburger) -->
+  <button id="feedback-btn" class="feedback-btn">
+    <img src="../home/icons/cloud2.gif" alt="Feedback Icon" class="feedback-gif">
+    <span class="feedback-text">Feedback</span>
+    <div class="feedback-hamburger">
+      <span></span><span></span><span></span>
     </div>
-  </div>
-  <p class="footer-copy">&copy; 2025 HealthCare+. All rights reserved.</p>
-</footer>
-<!-- Floating Feedback Button -->
-<button id="feedback-btn">
-  <img src="\Project in CC105\home\icons\cloud2.gif" alt="Feedback Icon" class="feedback-gif">Feedback</button>
+  </button>
 
 
   <!-- Feedback Modal -->
@@ -125,85 +134,86 @@
     </div>
   </div>
 
-<script>document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
+  <script>document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
 
-  toggle.addEventListener("click", () => {
-    toggle.classList.toggle("active");
-    navLinks.classList.toggle("show");
-  });
+      toggle.addEventListener("click", () => {
+        toggle.classList.toggle("active");
+        navLinks.classList.toggle("show");
+      });
 
-  const feedbackBtn = document.getElementById("feedback-btn");
-  const feedbackModal = document.getElementById("feedback-modal");
-  const closeBtn = document.querySelector(".close-btn");
-  const feedbackForm = document.getElementById("feedback-form-popup");
+      const feedbackBtn = document.getElementById("feedback-btn");
+      const feedbackModal = document.getElementById("feedback-modal");
+      const closeBtn = document.querySelector(".close-btn");
+      const feedbackForm = document.getElementById("feedback-form-popup");
 
-  feedbackBtn.addEventListener("click", () => {
-    feedbackModal.style.display = "block";
-  });
+      feedbackBtn.addEventListener("click", () => {
+        feedbackModal.style.display = "block";
+      });
 
-  closeBtn.addEventListener("click", () => {
-    feedbackModal.style.display = "none";
-  });
+      closeBtn.addEventListener("click", () => {
+        feedbackModal.style.display = "none";
+      });
 
-  window.addEventListener("click", (e) => {
-    if (e.target === feedbackModal) {
-      feedbackModal.style.display = "none";
+      window.addEventListener("click", (e) => {
+        if (e.target === feedbackModal) {
+          feedbackModal.style.display = "none";
+        }
+      });
+
+      feedbackForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = feedbackForm.name.value;
+        const email = feedbackForm.email.value;
+        const message = feedbackForm.message.value;
+
+        alert(`Thank you for your feedback, ${name}!`);
+        feedbackForm.reset();
+        feedbackModal.style.display = "none";
+      });
+    });
+
+
+    // Sticky navbar on scroll
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    const carousel = document.querySelector('.testimonials-carousel');
+
+    let scrollAmount = 0;
+    const scrollStep = 1; // pixels per interval
+    const scrollInterval = 30; // milliseconds
+
+    function autoScroll() {
+      if (scrollAmount < carousel.scrollWidth - carousel.clientWidth) {
+        scrollAmount += scrollStep;
+      } else {
+        scrollAmount = 0; // reset to start
+      }
+      carousel.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
     }
-  });
 
-  feedbackForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = feedbackForm.name.value;
-    const email = feedbackForm.email.value;
-    const message = feedbackForm.message.value;
+    setInterval(autoScroll, scrollInterval);
 
-    alert(`Thank you for your feedback, ${name}!`);
-    feedbackForm.reset();
-    feedbackModal.style.display = "none";
-  });
-});
+    const feedbackForm = document.getElementById('patient-feedback-form');
 
-
-// Sticky navbar on scroll
-const header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-const carousel = document.querySelector('.testimonials-carousel');
-
-let scrollAmount = 0;
-const scrollStep = 1; // pixels per interval
-const scrollInterval = 30; // milliseconds
-
-function autoScroll() {
-  if (scrollAmount < carousel.scrollWidth - carousel.clientWidth) {
-    scrollAmount += scrollStep;
-  } else {
-    scrollAmount = 0; // reset to start
-  }
-  carousel.scrollTo({
-    left: scrollAmount,
-    behavior: 'smooth'
-  });
-}
-
-setInterval(autoScroll, scrollInterval);
-
-const feedbackForm = document.getElementById('patient-feedback-form');
-
-feedbackForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('Thank you for your feedback!');
-  feedbackForm.reset();
-});
-</script>
+    feedbackForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you for your feedback!');
+      feedbackForm.reset();
+    });
+  </script>
 
 </body>
+
 </html>

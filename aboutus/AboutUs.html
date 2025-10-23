@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +29,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0.05;
-            background-image: 
+            background-image:
                 url('https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif');
             background-size: cover;
             background-position: center;
@@ -36,8 +37,15 @@
         }
 
         @keyframes bgFloat {
-            0%, 100% { transform: scale(1) translateY(0); }
-            50% { transform: scale(1.05) translateY(-10px); }
+
+            0%,
+            100% {
+                transform: scale(1) translateY(0);
+            }
+
+            50% {
+                transform: scale(1.05) translateY(-10px);
+            }
         }
 
         /* Floating medical icons animation */
@@ -58,15 +66,46 @@
             animation: float 15s ease-in-out infinite;
         }
 
-        .icon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .icon:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
-        .icon:nth-child(3) { left: 50%; top: 60%; animation-delay: 4s; }
-        .icon:nth-child(4) { left: 20%; top: 70%; animation-delay: 6s; }
-        .icon:nth-child(5) { left: 70%; top: 80%; animation-delay: 8s; }
+        .icon:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .icon:nth-child(2) {
+            left: 80%;
+            top: 30%;
+            animation-delay: 2s;
+        }
+
+        .icon:nth-child(3) {
+            left: 50%;
+            top: 60%;
+            animation-delay: 4s;
+        }
+
+        .icon:nth-child(4) {
+            left: 20%;
+            top: 70%;
+            animation-delay: 6s;
+        }
+
+        .icon:nth-child(5) {
+            left: 70%;
+            top: 80%;
+            animation-delay: 8s;
+        }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
         }
 
         /* ===========================
@@ -167,17 +206,27 @@
             transition: 0.3s;
         }
 
-        .menu-toggle span:nth-child(1) { top: 0; }
-        .menu-toggle span:nth-child(2) { top: 9px; }
-        .menu-toggle span:nth-child(3) { top: 18px; }
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-toggle span:nth-child(2) {
+            top: 9px;
+        }
+
+        .menu-toggle span:nth-child(3) {
+            top: 18px;
+        }
 
         .menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg);
             top: 9px;
         }
+
         .menu-toggle.active span:nth-child(2) {
             opacity: 0;
         }
+
         .menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg);
             top: 9px;
@@ -219,7 +268,7 @@
             color: #e7f2ef;
             padding: 100px 20px;
             text-align: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -236,8 +285,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.2) rotate(180deg); }
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.2) rotate(180deg);
+            }
         }
 
         .page-header h1 {
@@ -245,7 +301,7 @@
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
             animation: fadeInDown 1s ease;
         }
 
@@ -257,13 +313,27 @@
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Container */
@@ -273,7 +343,7 @@
             padding: 50px;
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(10px);
         }
 
@@ -305,7 +375,7 @@
         .about-section:hover {
             background-color: rgba(161, 194, 189, 0.1);
             transform: translateX(15px);
-            box-shadow: -5px 5px 15px rgba(0,0,0,0.1);
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .about-section h2 {
@@ -346,7 +416,7 @@
             border-radius: 20px;
             text-align: center;
             min-width: 200px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.5s ease;
             cursor: pointer;
             position: relative;
@@ -360,7 +430,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
             transform: scale(0);
             transition: transform 0.6s ease;
         }
@@ -371,7 +441,7 @@
 
         .stat-box:hover {
             transform: translateY(-15px) scale(1.08);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
         }
 
         .stat-box h3 {
@@ -412,7 +482,7 @@
             margin: 0 auto;
             overflow: hidden;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .carousel {
@@ -453,7 +523,7 @@
             background-color: #708993;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .dot:hover {
@@ -463,7 +533,7 @@
         .dot.active {
             background-color: #19183b;
             transform: scale(1.4);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
 
         /* Team Section */
@@ -492,7 +562,7 @@
             background: linear-gradient(135deg, #ffffff 0%, #e7f2ef 100%);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             transition: all 0.5s ease;
             cursor: pointer;
             position: relative;
@@ -516,7 +586,7 @@
 
         .team-card:hover {
             transform: translateY(-15px) rotate(2deg);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .team-card img {
@@ -532,7 +602,7 @@
         .team-card:hover img {
             border-color: #708993;
             transform: scale(1.15) rotate(-5deg);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .team-card h3 {
@@ -565,14 +635,14 @@
             background: linear-gradient(135deg, #a1c2bd 0%, #708993 100%);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             transition: all 0.4s ease;
             cursor: pointer;
         }
 
         .service-card:hover {
             transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         .service-card h3 {
@@ -607,7 +677,8 @@
             margin-bottom: 20px;
         }
 
-        .footer-contact, .footer-social {
+        .footer-contact,
+        .footer-social {
             flex: 1 1 250px;
         }
 
@@ -662,10 +733,11 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Animated Background -->
     <div class="bg-animation"></div>
-    
+
     <!-- Medical Icons -->
     <div class="medical-icons">
         <div class="icon">⚕️</div>
@@ -688,11 +760,11 @@
             </div>
 
             <ul class="nav-links" id="nav-links">
-   <li><a href="\Project in CC105\home\index.html">Home</a></li>
-      <li><a href="\Project in CC105\Services\services.html">Services</a></li>
-      <li><a href="\Project in CC105\aboutus\AboutUs.html">About Us</a></li>
-      <li><a href="\Project in CC105\ContactForm\ContactForm.html">Contact</a></li>
-      <li><a href="\Project in CC105\logres\login.html" class="register-btn">Register</a></li>
+                <li><a href="../home/index.html">Home</a></li>
+                <li><a href="../Services/services.html">Services</a></li>
+                <li><a href="../aboutus/AboutUs.html">About Us</a></li>
+                <li><a href="../ContactForm/ContactForm.html">Contact</a></li>
+                <li><a href="../logres/login.php" class="register-btn">Register</a></li>
             </ul>
         </nav>
     </header>
@@ -708,9 +780,16 @@
         <!-- Our Story -->
         <div class="about-section">
             <h2>Our Story</h2>
-            <p>Healthcare+ was established in 2020 with a simple mission: to provide quality healthcare services for everyone in our community. What started as a small clinic with just 20 beds has now grown into a full-service hospital with over 200 beds and state-of-the-art medical facilities.</p>
-            <p>Over the years, we have been committed to serving our patients with compassion, integrity, and excellence. Our dedicated team of doctors, nurses, and staff work tirelessly to ensure that every patient receives the best possible care. We believe in treating not just the illness, but the whole person - body, mind, and spirit.</p>
-            <p>Our journey has been marked by continuous innovation and a relentless pursuit of medical excellence. From implementing cutting-edge diagnostic equipment to adopting the latest treatment protocols, we remain at the forefront of healthcare delivery in our region.</p>
+            <p>Healthcare+ was established in 2020 with a simple mission: to provide quality healthcare services for
+                everyone in our community. What started as a small clinic with just 20 beds has now grown into a
+                full-service hospital with over 200 beds and state-of-the-art medical facilities.</p>
+            <p>Over the years, we have been committed to serving our patients with compassion, integrity, and
+                excellence. Our dedicated team of doctors, nurses, and staff work tirelessly to ensure that every
+                patient receives the best possible care. We believe in treating not just the illness, but the whole
+                person - body, mind, and spirit.</p>
+            <p>Our journey has been marked by continuous innovation and a relentless pursuit of medical excellence. From
+                implementing cutting-edge diagnostic equipment to adopting the latest treatment protocols, we remain at
+                the forefront of healthcare delivery in our region.</p>
         </div>
 
         <!-- Stats -->
@@ -736,15 +815,21 @@
         <!-- Mission -->
         <div class="about-section">
             <h2>Our Mission</h2>
-            <p>To deliver exceptional healthcare services with compassion and dedication, ensuring the well-being of our patients and the community we serve. We strive to make quality healthcare accessible to all, regardless of their background or circumstances.</p>
-            <p>Our mission extends beyond medical treatment - we aim to educate our community about preventive care, promote healthy lifestyles, and create a supportive environment where healing can truly take place.</p>
+            <p>To deliver exceptional healthcare services with compassion and dedication, ensuring the well-being of our
+                patients and the community we serve. We strive to make quality healthcare accessible to all, regardless
+                of their background or circumstances.</p>
+            <p>Our mission extends beyond medical treatment - we aim to educate our community about preventive care,
+                promote healthy lifestyles, and create a supportive environment where healing can truly take place.</p>
         </div>
 
         <!-- Vision -->
         <div class="about-section">
             <h2>Our Vision</h2>
-            <p>To be the leading healthcare provider in the region, recognized for our commitment to medical excellence, patient care, and community health. We envision a future where every member of our community has access to world-class healthcare services.</p>
-            <p>We aspire to be pioneers in medical innovation, setting new standards in patient care while maintaining the warmth and personal touch that makes Healthcare+ special.</p>
+            <p>To be the leading healthcare provider in the region, recognized for our commitment to medical excellence,
+                patient care, and community health. We envision a future where every member of our community has access
+                to world-class healthcare services.</p>
+            <p>We aspire to be pioneers in medical innovation, setting new standards in patient care while maintaining
+                the warmth and personal touch that makes Healthcare+ special.</p>
         </div>
 
         <!-- Carousel Section -->
@@ -754,19 +839,29 @@
                 <div class="carousel" id="carousel">
                     <div class="carousel-item">
                         <h3>🤝 Compassion</h3>
-                        <p>We treat every patient with empathy, respect, and dignity. Our healthcare professionals understand that behind every diagnosis is a person with unique needs, fears, and hopes. We take the time to listen, understand, and provide care that addresses both physical and emotional well-being.</p>
+                        <p>We treat every patient with empathy, respect, and dignity. Our healthcare professionals
+                            understand that behind every diagnosis is a person with unique needs, fears, and hopes. We
+                            take the time to listen, understand, and provide care that addresses both physical and
+                            emotional well-being.</p>
                     </div>
                     <div class="carousel-item">
                         <h3>⭐ Excellence</h3>
-                        <p>We maintain the highest standards of medical practice and continuously improve our services. Our commitment to excellence drives us to invest in the latest medical technologies, pursue ongoing education, and implement best practices that ensure optimal patient outcomes.</p>
+                        <p>We maintain the highest standards of medical practice and continuously improve our services.
+                            Our commitment to excellence drives us to invest in the latest medical technologies, pursue
+                            ongoing education, and implement best practices that ensure optimal patient outcomes.</p>
                     </div>
                     <div class="carousel-item">
                         <h3>🔬 Innovation</h3>
-                        <p>We embrace new technologies and methods to provide cutting-edge healthcare solutions. From telemedicine capabilities to advanced surgical techniques, we stay ahead of medical advancements to offer our patients the most effective treatments available.</p>
+                        <p>We embrace new technologies and methods to provide cutting-edge healthcare solutions. From
+                            telemedicine capabilities to advanced surgical techniques, we stay ahead of medical
+                            advancements to offer our patients the most effective treatments available.</p>
                     </div>
                     <div class="carousel-item">
                         <h3>🏆 Integrity</h3>
-                        <p>We uphold ethical principles and transparency in all our operations. Our patients trust us with their most precious asset - their health - and we honor that trust by maintaining the highest ethical standards, clear communication, and honest practices in everything we do.</p>
+                        <p>We uphold ethical principles and transparency in all our operations. Our patients trust us
+                            with their most precious asset - their health - and we honor that trust by maintaining the
+                            highest ethical standards, clear communication, and honest practices in everything we do.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -792,7 +887,8 @@
                 </div>
                 <div class="service-card">
                     <h3>👶 Maternity Care</h3>
-                    <p>Comprehensive prenatal, delivery, and postnatal care in a comfortable, family-centered environment.</p>
+                    <p>Comprehensive prenatal, delivery, and postnatal care in a comfortable, family-centered
+                        environment.</p>
                 </div>
                 <div class="service-card">
                     <h3>❤️ Cardiology</h3>
@@ -843,9 +939,16 @@
         <!-- Why Choose Us -->
         <div class="about-section">
             <h2>Why Choose Us?</h2>
-            <p>At Healthcare+, we believe that every patient deserves personalized care and attention. Our team is available 24/7 to respond to medical emergencies and provide the support you need. We are committed to maintaining the highest standards of medical practice and continuously improving our services to meet the changing needs of our community.</p>
-            <p>What sets us apart is our holistic approach to healthcare. We don't just treat symptoms; we work with you to understand the root causes of health issues and develop comprehensive treatment plans. Our patient-centered philosophy ensures that you are always at the heart of every decision we make.</p>
-            <p>With state-of-the-art facilities, experienced medical professionals, and a genuine commitment to your well-being, Healthcare+ is more than just a hospital - we're your partner in health, dedicated to helping you live your best life.</p>
+            <p>At Healthcare+, we believe that every patient deserves personalized care and attention. Our team is
+                available 24/7 to respond to medical emergencies and provide the support you need. We are committed to
+                maintaining the highest standards of medical practice and continuously improving our services to meet
+                the changing needs of our community.</p>
+            <p>What sets us apart is our holistic approach to healthcare. We don't just treat symptoms; we work with you
+                to understand the root causes of health issues and develop comprehensive treatment plans. Our
+                patient-centered philosophy ensures that you are always at the heart of every decision we make.</p>
+            <p>With state-of-the-art facilities, experienced medical professionals, and a genuine commitment to your
+                well-being, Healthcare+ is more than just a hospital - we're your partner in health, dedicated to
+                helping you live your best life.</p>
         </div>
     </div>
 
@@ -859,10 +962,10 @@
             </div>
             <div class="footer-social">
                 <h3>Follow Us</h3>
-                <a href="#"><img src="/home/icons/facebook.png" alt="Facebook"></a>
-                <a href="#"><img src="/home/icons/twitter.png" alt="Twitter"></a>
-                <a href="#"><img src="/home/icons/instagram.png" alt="Instagram"></a>
-                <a href="#"><img src="/home/icons/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../home/icons/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../home/icons/twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="../home/icons/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../home/icons/linkedin.png" alt="LinkedIn"></a>
             </div>
         </div>
         <p class="footer-copy">&copy; 2025 HealthCare+. All rights reserved.</p>
@@ -878,7 +981,7 @@
         function moveCarousel(index) {
             currentSlide = index;
             carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
+
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentSlide);
             });
@@ -900,4 +1003,5 @@
         });
     </script>
 </body>
+
 </html>

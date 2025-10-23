@@ -485,3 +485,84 @@ footer {
   cursor: pointer;
   color: #333;
 }
+
+/* =========================
+   Responsive Adjustments and I just overrode the feedback button here cuz I'm too lazy to read the original code - NeonTrace
+=========================== */
+
+/* === Feedback Button Base === */
+.feedback-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+.feedback-btn:hover {
+  background: #0056b3;
+}
+
+.feedback-gif {
+  width: 24px;
+  height: 24px;
+}
+
+/* === Feedback Hamburger === */
+.feedback-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20px;
+  height: 14px;
+}
+
+.feedback-hamburger span {
+  background: white;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* === Responsive Behavior === */
+@media (max-width: 768px) {
+  .feedback-text,
+  .feedback-gif {
+    display: none;
+  }
+
+  .feedback-hamburger {
+    display: flex;
+  }
+
+  #feedback-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+/* === Hamburger Animation === */
+.feedback-hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(6px);
+}
+
+.feedback-hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.feedback-hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-6px);
+}
