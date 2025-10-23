@@ -4,7 +4,7 @@ phpinfo();
 ?>
 ____________________________________________________________________________
 link for opening try
-http://localhost/Project%20in%20CC105/informationmanagement/informationmanagement.html
+    http://localhost/Project%20in%20CC105/informationmanagement/informationmanagement.html
 
 ____________________________________________________________________________
 
