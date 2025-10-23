@@ -116,12 +116,12 @@
     <div class="feedback-modal-content">
       <span class="close-btn">&times;</span>
       <h2>Send Your Feedback</h2>
-      <form id="feedback-form-popup">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="3" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Submit</button>
-      </form>
+        <form action="submit_feedback.php" method="POST" id="feedbackForm">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Feedback</button>
+        </form>
     </div>
   </div>
 
