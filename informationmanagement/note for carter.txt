@@ -1,0 +1,5 @@
+Pinalitan ko name file ng informationmanagement.html to informationmanagement.php soo tignan mo yung ibang redirecting files baka di mag connect
+
+I updated login.php and added logout.php sa logres folder.
+
+basically I have implemented the logout and if refreshed redirected sya sa login.php.
