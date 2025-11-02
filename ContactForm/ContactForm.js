@@ -1,5 +1,5 @@
-
-emailjs.init("3WQTWVJ9etTPOMg8w"); 
+// Initialize EmailJS with your Public Key
+emailjs.init("jd6G2cYaW-n0Ewv0h"); 
 
 const form = document.getElementById('contact-form');
 const popup = document.getElementById('thankyou-popup');
@@ -16,16 +16,16 @@ form.addEventListener('submit', function (e) {
     message: form.message.value
   };
 
-  // Show loading state (optional)
+  // Show loading state
   const submitBtn = form.querySelector('.btn');
   const originalBtnText = submitBtn.textContent;
   submitBtn.textContent = 'Sending...';
   submitBtn.disabled = true;
 
-  // Send email using EmailJS
+  // Send email using EmailJS with your correct Service ID and Template ID
   emailjs.send(
-    "service_33x9sv9",    
-    "template_c18igii",   
+    "service_lhsct9g",      // Your Service ID
+    "template_8079x7e",     // Your Template ID
     formData
   )
   .then(function(response) {
