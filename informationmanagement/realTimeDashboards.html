@@ -1,60 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Real-Time Patient Flow Management</title>
+
+  <!-- Tailwind CSS framework used so it's easier to code ts -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a2e0f4d4e4.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="realTimeDashboards.css">
+
+  <!-- Custom tweaks (Our original CSS) -->
+  <link rel="stylesheet" href="realTimeDashboards.css" />
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-  <div class="max-w-6xl mx-auto p-6 fade-in">
-    <h1 class="text-2xl font-bold text-center mb-6">Real-Time Patient Flow Management</h1>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
+    
+    <h1 class="text-2xl md:text-3xl font-bold text-center mb-6">
+      🏥 Real-Time Patient Flow Management
+    </h1>
 
-    <!-- Dashboards Side by Side -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- DASHBOARDS GRID (auto-stacks on small screens) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-      <!-- Regular Queue Dashboard -->
+      <!-- REGULAR QUEUE -->
       <section id="regular-section" class="text-center">
-        <h2 class="text-lg font-semibold mb-3 text-gray-700">Regular Patient Queue</h2>
-        <div class="bg-white rounded-xl shadow overflow-hidden table-container inline-block text-left">
-          <table>
+        <h2 class="text-lg font-semibold mb-3 text-gray-700 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-user-clock text-blue-500"></i> Regular Patient Queue
+        </h2>
+
+        <div class="table-wrapper bg-white rounded-xl shadow overflow-x-auto">
+          <table class="w-full border-collapse min-w-[500px]">
             <thead class="bg-gray-100 text-gray-700">
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Condition</th>
-                <th>Registered Time</th>
-                <th>Status</th>
+                <th class="py-2 px-3">ID</th>
+                <th class="py-2 px-3">Name</th>
+                <th class="py-2 px-3">Age</th>
+                <th class="py-2 px-3">Condition</th>
+                <th class="py-2 px-3">Registered</th>
+                <th class="py-2 px-3">Status</th>
               </tr>
             </thead>
             <tbody id="regularQueueBody">
-              <tr><td colspan="6" class="text-center py-6 text-gray-500">Loading patients...</td></tr>
+              <tr>
+                <td colspan="6" class="text-center py-6 text-gray-500">Loading patients...</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <!-- Priority Queue Dashboard -->
-      <section id="priority-section" class="fade-in text-center">
-        <h2 class="text-lg font-semibold mb-3 text-red-700">Priority Patient Queue</h2>
-        <div class="bg-white rounded-xl shadow overflow-hidden table-container inline-block text-left">
-          <table>
+      <!-- PRIORITY QUEUE -->
+      <section id="priority-section" class="text-center">
+        <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-red-500"></i> Priority Patient Queue
+        </h2>
+
+        <div class="table-wrapper bg-white rounded-xl shadow overflow-x-auto">
+          <table class="w-full border-collapse min-w-[500px]">
             <thead class="bg-red-100 text-red-800">
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Condition</th>
-                <th>Registered Time</th>
-                <th>Status</th>
+                <th class="py-2 px-3">ID</th>
+                <th class="py-2 px-3">Name</th>
+                <th class="py-2 px-3">Age</th>
+                <th class="py-2 px-3">Condition</th>
+                <th class="py-2 px-3">Registered</th>
+                <th class="py-2 px-3">Status</th>
               </tr>
             </thead>
             <tbody id="priorityQueueBody">
-              <tr><td colspan="6" class="text-center py-6 text-gray-500">No priority patients yet...</td></tr>
+              <tr>
+                <td colspan="6" class="text-center py-6 text-gray-500">No priority patients yet...</td>
+              </tr>
             </tbody>
           </table>
         </div>
