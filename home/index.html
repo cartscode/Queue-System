@@ -105,64 +105,11 @@
   </div>
   <p class="footer-copy">&copy; 2025 HealthCare+. All rights reserved.</p>
 </footer>
-<!-- Floating Feedback Button -->
-<button id="feedback-btn">
-  <img src="\Project in CC105\home\icons\cloud2.gif" alt="Feedback Icon" class="feedback-gif">Feedback</button>
 
 
-  <!-- Feedback Modal -->
-  <div id="feedback-modal" class="feedback-modal">
-    <div class="feedback-modal-content">
-      <span class="close-btn">&times;</span>
-      <h2>Send Your Feedback</h2>
-        <form action="submit_feedback.php" method="POST" id="feedbackForm">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-          <textarea name="message" placeholder="Your Message" required></textarea>
-          <button type="submit">Send Feedback</button>
-        </form>
-    </div>
-  </div>
 
-<script>document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
 
-  toggle.addEventListener("click", () => {
-    toggle.classList.toggle("active");
-    navLinks.classList.toggle("show");
-  });
-
-  const feedbackBtn = document.getElementById("feedback-btn");
-  const feedbackModal = document.getElementById("feedback-modal");
-  const closeBtn = document.querySelector(".close-btn");
-  const feedbackForm = document.getElementById("feedback-form-popup");
-
-  feedbackBtn.addEventListener("click", () => {
-    feedbackModal.style.display = "block";
-  });
-
-  closeBtn.addEventListener("click", () => {
-    feedbackModal.style.display = "none";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === feedbackModal) {
-      feedbackModal.style.display = "none";
-    }
-  });
-
-  feedbackForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = feedbackForm.name.value;
-    const email = feedbackForm.email.value;
-    const message = feedbackForm.message.value;
-
-    alert(`Thank you for your feedback, ${name}!`);
-    feedbackForm.reset();
-    feedbackModal.style.display = "none";
-  });
-});
+<script>
 
 
 // Sticky navbar on scroll
