@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// If user is not logged in, redirect to login page
+if (!isset($_SESSION['email'])) {
+    header("Location: /Project in CC105/logres/login.php");
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +32,10 @@
     </div>
 
     <ul class="nav-links" id="nav-links">
+      <li><a href="\Project in CC105\home\index.html">Home</a></li>
+      <li><a href="\Project in CC105\Services\services.html">Services</a></li>
+      <li><a href="\Project in CC105\aboutus\AboutUs.html">About Us</a></li>
+      <li><a href="/ContactForm/ContactForm.html">Contact</a></li>
         <li><a class="register-btn" onclick="logout()">Log out</a></li>
     </ul>
   </nav>
@@ -143,6 +158,18 @@
 
 
 <script src="scriptinfo.js">
+</script>
+<script>
+// Auto logout when tab/window is closed or back button is used
+window.addEventListener("beforeunload", function() {
+    navigator.sendBeacon("/Project in CC105/logres/logout.php");
+});
+
+// Manual logout button function
+function logout() {
+    fetch("/Project in CC105/logres/logout.php")
+      .then(() => window.location.href = "/Project in CC105/logres/login.php");
+}
 </script>
 
 </body>

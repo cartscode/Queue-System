@@ -38,7 +38,7 @@ if (isset($_POST['login'])) {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['email'] = $email;
-        header("Location: /Project in CC105/informationmanagement/informationmanagement.html");
+        header("Location: /Project in CC105/informationmanagement/informationmanagement.php");
         exit;
     } else {
         $message = "Invalid email or password!";
@@ -165,9 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
-
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function toggleForms() {
   document.getElementById("loginForm").style.display =
@@ -248,5 +245,8 @@ for (let i = 0; i < maxWalkers; i++) {
 }
 
 </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </html>
