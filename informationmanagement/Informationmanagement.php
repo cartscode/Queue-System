@@ -2,6 +2,7 @@
 session_start();
 
 // If user is not logged in, redirect to login page
+// ito reason kaya nag lalog out kapag nag add queue sa list
 if (!isset($_SESSION['email'])) {
     header("Location: /Project in CC105/logres/login.php");
     exit;

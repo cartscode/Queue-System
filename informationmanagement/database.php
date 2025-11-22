@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ✅ Keep this good part: alert and redirect to the form
         echo "<script>
                 alert('✅ Patient added successfully to the queue!');
-                window.location.href='informationmanagement.html';
+                window.location.href='/Project in CC105/informationmanagement/Informationmanagement.php';
               </script>";
     } else {
         echo "<script>
