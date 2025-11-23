@@ -160,11 +160,6 @@ if (!isset($_SESSION['email'])) {
 <script src="scriptinfo.js">
 </script>
 <script>
-// Auto logout when tab/window is closed or back button is used
-window.addEventListener("beforeunload", function() {
-    navigator.sendBeacon("/Project in CC105/logres/logout.php");
-});
-
 // Manual logout button function
 function logout() {
     fetch("/Project in CC105/logres/logout.php")
