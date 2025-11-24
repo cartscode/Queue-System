@@ -2,13 +2,11 @@
 session_start();
 
 // If user is not logged in, redirect to login page
-// ito reason kaya nag lalog out kapag nag add queue sa list
 if (!isset($_SESSION['email'])) {
     header("Location: /Project in CC105/logres/login.php");
     exit;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,11 +31,7 @@ if (!isset($_SESSION['email'])) {
     </div>
 
     <ul class="nav-links" id="nav-links">
-      <li><a href="\Project in CC105\home\index.html">Home</a></li>
-      <li><a href="\Project in CC105\Services\services.html">Services</a></li>
-      <li><a href="\Project in CC105\aboutus\AboutUs.html">About Us</a></li>
-      <li><a href="/ContactForm/ContactForm.html">Contact</a></li>
-        <li><a class="register-btn" onclick="logout()">Log out</a></li>
+      <li><a class="register-btn" onclick="logout()">Log out</a></li>
     </ul>
   </nav>
 </header>
@@ -83,9 +77,10 @@ if (!isset($_SESSION['email'])) {
 </div>
 
 <div class="container">
+
   <!-- Register Form -->
-<div class="card">
-  <h3>➕ Register New Patient</h3>
+  <div class="card">
+    <h3>➕ Register New Patient</h3>
   
     <form id="patientForm" method="POST" action="database.php">
       <label>Patient Name</label>
@@ -106,8 +101,8 @@ if (!isset($_SESSION['email'])) {
       <button type="submit">Add Patient to Queue</button>
     </form>
 
-  <button onclick="goToDashboard()">Live Dashboard</button>
-</div>
+    <button onclick="goToDashboard()">Live Dashboard</button>
+  </div>
 
 
   <!-- Queues Display -->
@@ -157,20 +152,17 @@ if (!isset($_SESSION['email'])) {
   </div>
 </div>
 
+<script src="scriptinfo.js"></script>
 
-<script src="scriptinfo.js">
-</script>
 <script>
-// Auto logout when tab/window is closed or back button is used
-window.addEventListener("beforeunload", function() {
-    navigator.sendBeacon("/Project in CC105/logres/logout.php");
-});
-
-// Manual logout button function
+// 🔹 FIXED: Manual logout only
 function logout() {
     fetch("/Project in CC105/logres/logout.php")
       .then(() => window.location.href = "/Project in CC105/logres/login.php");
 }
+
+// ❌ REMOVED: Auto logout when refreshing/closing tab
+// It was causing the session to end on every page reload.
 </script>
 
 </body>
