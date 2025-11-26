@@ -6,7 +6,9 @@ ____________________________________________________________________________
 link for opening try
     http://localhost/Project%20in%20CC105/informationmanagement/informationmanagement.php
 
-____________________________________________________________________________
+    http://localhost/Project%20in%20CC105/logres/login.php
+
+__________________________________________________________________________
 
 Console sa Xampp(let's go)
 
