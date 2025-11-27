@@ -10,14 +10,19 @@ if (isset($_POST['register'])) {
     $form_submitted = true;
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
+    $question = trim($_POST['recovery_question']);
+    $answer = trim($_POST['recovery_answer']);
 
-    // Check if email already exists
     $check = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
     if (mysqli_num_rows($check) > 0) {
         $message = "Email already exists!";
     } else {
         $hashed = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO users (email, password) VALUES ('$email', '$hashed')";
+        $answer_hashed = password_hash($answer, PASSWORD_DEFAULT);
+
+        $query = "INSERT INTO users (email, password, recovery_question, recovery_answer) 
+                  VALUES ('$email', '$hashed', '$question', '$answer_hashed')";
+
         if (mysqli_query($conn, $query)) {
             header("Location: login.php?registered=success");
             exit;
@@ -38,13 +43,14 @@ if (isset($_POST['login'])) {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['email'] = $email;
-        header("Location: /Project in CC105/informationmanagement/informationmanagement.php");
+        header("Location: /Project in CC105/informationmanagement/informationmanagement.html");
         exit;
     } else {
         $message = "Invalid email or password!";
     }
 }
 ?>
+
 
 
 
@@ -62,19 +68,20 @@ if (isset($_POST['login'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="login.css" rel="stylesheet">
 </head>
+
 <body>
 
-<?php if ($form_submitted && !empty($message)): ?>
+    <?php if ($form_submitted && !empty($message)): ?>
     <div class="alert alert-danger text-center" role="alert">
         <?php echo $message; ?>
     </div>
-<?php endif; ?>
+    <?php endif; ?>
 
-<?php if (isset($_GET['registered']) && $_GET['registered'] === 'success'): ?>
+    <?php if (isset($_GET['registered']) && $_GET['registered'] === 'success'): ?>
     <div class="alert alert-success text-center">
         Registration successful! You can now log in.
     </div>
-<?php endif; ?>
+    <?php endif; ?>
 
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
@@ -89,7 +96,7 @@ if (isset($_POST['login'])) {
 
     <div class="bubbles">
         <?php for ($i=0; $i<25; $i++): ?>
-            <div class="bubble"></div>
+        <div class="bubble"></div>
         <?php endfor; ?>
     </div>
 
@@ -110,14 +117,25 @@ if (isset($_POST['login'])) {
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" id="regPassword" class="form-control" placeholder="Create a password"
-                            required>
+                        <input type="password" name="password" id="regPassword" class="form-control"
+                            placeholder="Create a password" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
                         <input type="password" id="regConfirmPassword" class="form-control"
                             placeholder="Confirm your password" required>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Recovery Question</label>
+                        <input type="text" name="recovery_question" class="form-control"
+                            placeholder="Enter a recovery question" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Recovery Answer</label>
+                        <input type="text" name="recovery_answer" class="form-control" placeholder="Enter the answer"
+                            required>
+                    </div>
+
                     <button type="submit" name="register" class="btn btn-login w-100">Register</button>
                 </form>
                 <p class="text-center mt-3">Already have an account?
@@ -135,10 +153,15 @@ if (isset($_POST['login'])) {
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                        <input type="password" name="password" class="form-control" placeholder="Enter your password"
+                            required>
                     </div>
                     <button type="submit" name="login" class="btn btn-login w-100 fw-bold">Login</button>
                 </form>
+                <p class="text-center mt-3">
+                    <a href="forgot.php">Forgot Password?</a>
+                </p>
+
                 <p class="text-center mt-3">Don’t have an account?
                     <a href="#" class="toggle-link" onclick="toggleForms()">Register</a>
                 </p>
@@ -153,43 +176,46 @@ if (isset($_POST['login'])) {
         <div class="floor"></div>
     </div>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const alertBox = document.querySelector(".alert");
+        if (alertBox) {
+            setTimeout(() => {
+                alertBox.style.transition = "opacity 0.5s ease";
+                alertBox.style.opacity = "0";
+                setTimeout(() => alertBox.remove(), 500);
+            }, 3000); // 3 seconds
+        }
+    });
+    </script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const alertBox = document.querySelector(".alert");
-  if (alertBox) {
-    setTimeout(() => {
-      alertBox.style.transition = "opacity 0.5s ease";
-      alertBox.style.opacity = "0";
-      setTimeout(() => alertBox.remove(), 500);
-    }, 3000); // 3 seconds
-  }
-});
-</script>
-<script>
-    function toggleForms() {
-  document.getElementById("loginForm").style.display =
-    document.getElementById("loginForm").style.display === "none" ? "block" : "none";
-  document.getElementById("registerForm").style.display =
-    document.getElementById("registerForm").style.display === "none" ? "block" : "none";
+function toggleForms() {
+    document.getElementById("loginForm").style.display =
+        document.getElementById("loginForm").style.display === "none" ? "block" : "none";
+    document.getElementById("registerForm").style.display =
+        document.getElementById("registerForm").style.display === "none" ? "block" : "none";
 }
 
 function validateRegister(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const password = document.getElementById("regPassword").value;
-  const confirmPassword = document.getElementById("regConfirmPassword").value;
+    const password = document.getElementById("regPassword").value;
+    const confirmPassword = document.getElementById("regConfirmPassword").value;
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match!");
-    return;
-  }
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
 
-  toggleForms();
+    toggleForms();
 }
 
 function goToDashboard(event) {
-  event.preventDefault();
-  window.location.href = "\Project in CC105\informationmanagement\Informationmanagement.html";
+    event.preventDefault();
+    window.location.href = "\Project in CC105\informationmanagement\Informationmanagement.html";
 }
 
 // ---- Hospital Walk Animation ----
@@ -199,54 +225,49 @@ const walkers = [];
 const spacing = 220; // 200px + 20px gap
 
 function getRandomClass() {
-  return Math.floor(Math.random() * 19); // 0–18
+    return Math.floor(Math.random() * 19); // 0–18
 }
 
 function createWalker(offset = 0) {
-  const num = getRandomClass();
-  const img = document.createElement("img");
-  img.src = `img/patient${num}.png`; // <-- patient images must exist
-  img.classList.add("patient-walker");
-  img.dataset.index = num;
+    const num = getRandomClass();
+    const img = document.createElement("img");
+    img.src = `img/patient${num}.png`; // <-- patient images must exist
+    img.classList.add("patient-walker");
+    img.dataset.index = num;
 
-  img.style.left = (-220 - offset) + "px";
-  container.appendChild(img);
+    img.style.left = (-220 - offset) + "px";
+    container.appendChild(img);
 
-  walkers.push(img);
-  walkForward(img, num);
+    walkers.push(img);
+    walkForward(img, num);
 }
 
 function walkForward(img, num) {
-  const walkInterval = setInterval(() => {
-    const currentLeft = parseFloat(img.style.left) || 0;
-    img.style.left = (currentLeft + 40) + "px"; // step forward
+    const walkInterval = setInterval(() => {
+        const currentLeft = parseFloat(img.style.left) || 0;
+        img.style.left = (currentLeft + 40) + "px"; // step forward
 
-    // When reaching center -> change into client
-    if (currentLeft >= window.innerWidth / 2 - 100 && !img.dataset.converted) {
-      img.src = `img/client${num}.png`; // <-- client images must exist
-      img.dataset.converted = true;
-    }
+        // When reaching center -> change into client
+        if (currentLeft >= window.innerWidth / 2 - 100 && !img.dataset.converted) {
+            img.src = `img/client${num}.png`; // <-- client images must exist
+            img.dataset.converted = true;
+        }
 
-    // When exiting right side -> remove and respawn
-    if (currentLeft > window.innerWidth) {
-      clearInterval(walkInterval);
-      container.removeChild(img);
-      walkers.splice(walkers.indexOf(img), 1);
-      createWalker(); // spawn replacement
-    }
-  }, 1000); // step every 1s
+        // When exiting right side -> remove and respawn
+        if (currentLeft > window.innerWidth) {
+            clearInterval(walkInterval);
+            container.removeChild(img);
+            walkers.splice(walkers.indexOf(img), 1);
+            createWalker(); // spawn replacement
+        }
+    }, 1000); // step every 1s
 }
 
 // Initialize walkers with spacing
 for (let i = 0; i < maxWalkers; i++) {
-  setTimeout(() => {
-    createWalker(i * spacing);
-  }, i * 800);
+    setTimeout(() => {
+        createWalker(i * spacing);
+    }, i * 800);
 }
-
 </script>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
 </html>
