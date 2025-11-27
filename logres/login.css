@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #4f4ba2, #19183b, #030213);
+    background: linear-gradient(135deg, #708993, #19183b, #030213);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
 }
@@ -22,9 +22,9 @@ body {
 .bubble {
     position: absolute;
     bottom: -150px;
-    background: rgba(255,255,255,0.25);
+    background: rgba(161, 194, 189, 0.25);
     border-radius: 50%;
-    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+    box-shadow: 0 0 15px rgba(161, 194, 189, 0.4);
     animation: rise linear infinite;
 }
 
@@ -71,39 +71,41 @@ body {
 .bubble:nth-child(24) { left: 68%; width: 18px; height: 18px; animation-duration: 6.4s; animation-delay: 1.3s; }
 .bubble:nth-child(25) { left: 88%; width: 34px; height: 34px; animation-duration: 9.8s; animation-delay: 3.8s; }
 
-
 .auth-card {
     position: relative;
     z-index: 2;
 }
 
 .navbar-custom {
-    background-color: 19183B;
+    background-color: #19183B;
 }
 
 .navbar-custom .nav-link {
-    color: black;
+    color: white;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .navbar-custom .nav-link.active,
 .navbar-custom .nav-link:hover {
-    color: #51a2ff;
+    color: #A1C2BD;
 }
+
 .navbar-brand {
     color: white!important;
 }
+
 .btn-login {
     background-color: #A1C2BD;
     color: #19183B;
     border-radius: 5px;
     padding: 0.5rem 1.5rem;
+    font-weight: 600;
 }
 
 .btn-login:hover {
     color: white;
-    background-color: #507c76;
+    background-color: #708993;
 }
 
 .auth-wrapper {
@@ -127,26 +129,28 @@ body {
     text-align: center;
     margin-bottom: 1.5rem;
     font-weight: 600;
+    color: #19183b;
 }
 
 .toggle-link {
-    color: #155dfc;
+    color: #a1c2bd;
     text-decoration: none;
     font-weight: 500;
 }
 
 .toggle-link:hover {
     text-decoration: underline;
+    color: #708993;
 }
 
 .hospital-container {
-  position: fixed;         /* overlay, independent of normal flow */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;    /* lets clicks pass through to auth-card */
-  z-index: -1;             /* sits above page background but below modal popups */
+  pointer-events: none;
+  z-index: -1;
 }
 
 .floor {
@@ -154,23 +158,20 @@ body {
   left: 0;
   width: 100%;
   height: 5px;
-  background: #000000;
-
-  /* line up with auth-card center */
+  background: #19183b;
   top: 61.5%;
   transform: translateY(-50%);
 }
 
 .walking-png {
   position: absolute;
-  top: 50%;                /* aligned to floor */
-  transform: translateY(-100%); /* feet touch floor */
+  top: 50%;
+  transform: translateY(-100%);
   width: 200px;
   height: 200px;
   animation: hop 1s infinite ease-in-out;
-  pointer-events: auto;    /* turn this on if you need clicks on PNGs */
+  pointer-events: auto;
 }
-
 
 .patient-walker {
   position: absolute;

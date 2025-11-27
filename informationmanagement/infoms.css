@@ -15,8 +15,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* makes the video fill screen */
-  z-index: -1;       /* keeps video behind everything */
+  object-fit: cover;
+  z-index: -1;
 }
 
 /* ===========================
@@ -27,12 +27,12 @@ header {
   top: 0;
   z-index: 1000;
   padding: 15px 50px;
-  background-color: rgba(25, 24, 59, 0.89); /* semi-transparent */
+  background-color: rgba(25, 24, 59, 0.89);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 header.scrolled {
-  background-color: #19183B; /* solid color after scroll */
+  background-color: #19183B;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -150,87 +150,86 @@ header.scrolled {
 
   .menu-toggle {
     display: block;
-
   }
 
   .nav-links.show {
     display: flex;
   }
-  
 }
-    .container {
-        max-width: 1300px;
-        margin: 30px auto;
-        display: grid;
-        grid-template-columns: 30% 68%;
-        gap: 2%;
-    }
 
-    .card {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        padding: 20px;
-    }
+.container {
+  max-width: 1300px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 30% 68%;
+  gap: 2%;
+}
 
-    .card h3 {
-        color: #2d2a8c;
-        margin-bottom: 15px;
-    }
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+}
 
-    input, select, button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-    }
+.card h3 {
+  color: #19183b;
+  margin-bottom: 15px;
+}
 
-    button {
-        background-color: #4B3BA8;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-    }
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
 
-    button:hover {
-        background-color: #3b3092;
-    }
+button {
+  background-color: #a1c2bd;
+  color: #19183b;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-    }
+button:hover {
+  background-color: #708993;
+}
 
-    th, td {
-        border-bottom: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
 
-    th {
-        background-color: #f0f0f8;
-        color: #333;
-    }
+th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
 
-    .queue-section {
-        margin-bottom: 30px;
-    }
+th {
+  background-color: #e7f2ef;
+  color: #19183b;
+}
 
-    .queue-section h4 {
-        color: #4B3BA8;
-        margin-bottom: 10px;
-    }
+.queue-section {
+  margin-bottom: 30px;
+}
 
-    .empty {
-        text-align: center;
-        color: gray;
-        padding: 10px;
-    }
+.queue-section h4 {
+  color: #a1c2bd;
+  margin-bottom: 10px;
+}
 
-    .status-dropdown {
+.empty {
+  text-align: center;
+  color: #708993;
+  padding: 10px;
+}
+
+.status-dropdown {
   padding: 5px 8px;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -239,16 +238,16 @@ header.scrolled {
 }
 
 .status-dropdown option[value="Waiting"] {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: #e7f2ef;
+  color: #19183b;
 }
 .status-dropdown option[value="Treated"] {
-  background-color: #cce5ff;
-  color: #004085;
+  background-color: #a1c2bd;
+  color: #19183b;
 }
 .status-dropdown option[value="Completed"] {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #708993;
+  color: #ffffff;
 }
 
 .action-icons {
@@ -258,13 +257,13 @@ header.scrolled {
 .action-icons i {
   cursor: pointer;
   margin: 0 6px;
-  color: #555;
+  color: #708993;
   font-size: 18px;
   transition: color 0.3s ease;
 }
 
 .action-icons i:hover {
-  color: #007bff;
+  color: #a1c2bd;
 }
 
 /* status bar */
@@ -296,14 +295,14 @@ header.scrolled {
 
 .card-summary p {
   font-size: 14px;
-  color: #666;
+  color: #708993;
   margin: 0;
 }
 
 .card-summary h2 {
   margin: 5px 0 0;
   font-size: 22px;
-  color: #222;
+  color: #19183b;
 }
 
 .icon {
@@ -316,22 +315,21 @@ header.scrolled {
 }
 
 .icon.purple {
-  background-color: rgba(128, 0, 255, 0.1);
-  color: #8000ff;
+  background-color: rgba(161, 194, 189, 0.2);
+  color: #a1c2bd;
 }
 
 .icon.yellow {
-  background-color: rgba(255, 200, 0, 0.1);
-  color: #f4b400;
+  background-color: rgba(112, 137, 147, 0.2);
+  color: #708993;
 }
 
 .icon.violet {
-  background-color: rgba(150, 100, 255, 0.1);
-  color: #9b59b6;
+  background-color: rgba(161, 194, 189, 0.15);
+  color: #a1c2bd;
 }
 
 .icon.green {
-  background-color: rgba(0, 200, 100, 0.1);
-  color: #27ae60;
+  background-color: rgba(112, 137, 147, 0.2);
+  color: #708993;
 }
-

@@ -7,7 +7,7 @@
 
 .c-item {
   position: relative;
-  height: 70vh; /* adjust to your liking */
+  height: 70vh;
   overflow: hidden;
 }
 
@@ -18,29 +18,28 @@
 }
 
 .hero-section {
-  background: #f5faff; /* light hospital blue background */
+  background: #e7f2ef;
   padding: 80px 0;
 }
 
 .hero-text h1 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #007bff; /* Bootstrap primary blue */
+  color: #19183b;
 }
 
 .hero-text p {
   font-size: 1.1rem;
   margin: 20px 0;
-  color: #333;
+  color: #708993;
 }
 
 .hero-image {
   max-width: 100%;
   height: auto;
-  border-radius: 10px; /* slight curve */
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 
 /* ===========================
    Navbar (Pure CSS)
@@ -50,12 +49,12 @@ header {
   top: 0;
   z-index: 1000;
   padding: 5px 50px;
-  background-color: rgba(25, 24, 59, 0.89); /* semi-transparent */
+  background-color: rgba(25, 24, 59, 0.89);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 header.scrolled {
-  background-color: #19183B; /* solid color after scroll */
+  background-color: #19183B;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -211,6 +210,13 @@ header.scrolled {
   opacity: 0;
   transform: translateY(15px);
   transition: all 0.3s ease;
+  background: #a1c2bd;
+  color: #19183b;
+  font-weight: 600;
+}
+
+.learn-more-btn:hover {
+  background: #708993;
 }
 
 .service-card:hover .learn-more-btn {
@@ -284,17 +290,10 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+  color: #19183b;
 }
 
 #bottomText {
   text-align: center;
+  color: #708993;
 }
-
-/* Logo */
-.logo {
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-  text-decoration: none;
-}
-

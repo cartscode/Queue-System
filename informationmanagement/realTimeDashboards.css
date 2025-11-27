@@ -5,14 +5,25 @@
 .fade-in { animation: fadeIn 0.6s ease-in-out; }
 
 .priority-tab {
-  background-color: #dc2626;
+  background-color: #708993;
   color: white;
-  box-shadow: 0 0 10px rgba(239,68,68,0.5);
+  box-shadow: 0 0 10px rgba(112, 137, 147, 0.5);
 }
 
-.status-waiting { background: #d1fae5; color: #065f46; }
-.status-treated { background: #fef3c7; color: #92400e; }
-.status-completed { background: #dbeafe; color: #1e40af; }
+.status-waiting { 
+  background: #e7f2ef; 
+  color: #19183b; 
+}
+
+.status-treated { 
+  background: #a1c2bd; 
+  color: #19183b; 
+}
+
+.status-completed { 
+  background: #708993; 
+  color: #ffffff; 
+}
 
 .status-badge {
   padding: 4px 8px;
@@ -23,16 +34,21 @@
 
 table { 
   width: 100%;
-   border-collapse: collapse;
- }
-th, td { padding: 12px; text-align: left; }
-tr:nth-child(even) { background-color: #f9fafb; }
+  border-collapse: collapse;
+}
+
+th, td { 
+  padding: 12px; 
+  text-align: left; 
+}
+
+tr:nth-child(even) { 
+  background-color: #e7f2ef; 
+}
 
 .table-container {
   overflow-x: auto;
-  border: 2px solid #e5e7eb; /* Added border for both tables */
-  border-radius: 0.75rem; /* Match rounded-xl */
+  border: 2px solid #a1c2bd;
+  border-radius: 0.75rem;
   background-color: #ffffff;
-
-  
 }
