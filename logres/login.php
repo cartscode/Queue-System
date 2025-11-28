@@ -43,7 +43,7 @@ if (isset($_POST['login'])) {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['email'] = $email;
-        header("Location: /Project in CC105/informationmanagement/informationmanagement.html");
+        header("Location: /Project in CC105/informationmanagement/informationmanagement.php");
         exit;
     } else {
         $message = "Invalid email or password!";
