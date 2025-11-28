@@ -215,7 +215,7 @@ function validateRegister(event) {
 
 function goToDashboard(event) {
     event.preventDefault();
-    window.location.href = "\Project in CC105\informationmanagement\Informationmanagement.html";
+    window.location.href = "\Project in CC105\informationmanagement\Informationmanagement.php";
 }
 
 // ---- Hospital Walk Animation ----

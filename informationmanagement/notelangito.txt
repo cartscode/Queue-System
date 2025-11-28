@@ -8,6 +8,8 @@ link for opening try
 
     http://localhost/Project%20in%20CC105/logres/login.php
 
+    http://localhost/Project%20in%20CC105/home/
+
 __________________________________________________________________________
 
 Console sa Xampp(let's go)
