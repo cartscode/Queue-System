@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Patient Flow Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0f4d4e4.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="realTimeDashboards.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-6xl mx-auto p-6 fade-in">
+    <h1 class="text-2xl font-bold text-center mb-6">Real-Time Patient Flow Management</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Regular Queue Dashboard -->
+      <section id="regular-section" class="text-center">
+        <h2 class="text-lg font-semibold mb-3 text-gray-700">Regular Patient Queue</h2>
+        <div class="bg-white rounded-xl shadow overflow-hidden table-container inline-block text-left">
+          <table>
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th>Name</th>
+                <th>Room</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="regularQueueBody">
+              <tr>
+                <td colspan="3" class="text-center py-6 text-gray-500">Loading patients...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Priority Queue Dashboard -->
+      <section id="priority-section" class="fade-in text-center">
+        <h2 class="text-lg font-semibold mb-3 text-red-700">Priority Patient Queue</h2>
+        <div class="bg-white rounded-xl shadow overflow-hidden table-container inline-block text-left">
+          <table>
+            <thead class="bg-red-100 text-red-800">
+              <tr>
+                <th>Name</th>
+                <th>Room</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="priorityQueueBody">
+              <tr>
+                <td colspan="3" class="text-center py-6 text-gray-500">No priority patients yet...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="realTimeDashboards.js"></script>
+</body>
+
+</html>
