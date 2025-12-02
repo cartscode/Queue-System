@@ -2,27 +2,33 @@
 include('config.php');
 session_start();
 
+// If user is already logged in, send them to dashboard
+if (isset($_SESSION['username'])) {
+    header("Location: ../informationmanagement/informationmanagement.php");
+    exit;
+}
+
 $message = "";
 $form_submitted = false;
 
-// Login only
 if (isset($_POST['login'])) {
     $form_submitted = true;
-    $email = trim($_POST['email']);
+    $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
     $user = mysqli_fetch_assoc($result);
 
     if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['email'] = $email;
+        $_SESSION['username'] = $username;
         header("Location: ../informationmanagement/informationmanagement.php");
         exit;
     } else {
-        $message = "Invalid email or password!";
+        $message = "Invalid username or password!";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,9 +72,11 @@ if (isset($_POST['login'])) {
                 <h3>Login</h3>
                 <form method="POST" action="">
                     <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter your username"
+                            required>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Enter your password"
@@ -151,4 +159,5 @@ for (let i = 0; i < maxWalkers; i++) {
     }, i * 800);
 }
 </script>
+
 </html>
