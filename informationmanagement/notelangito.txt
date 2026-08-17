@@ -6,7 +6,7 @@ ____________________________________________________________________________
 link for opening try
     http://localhost/Project%20in%20CC105/informationmanagement/informationmanagement.php
 
-    http://localhost/Project%20in%20CC105/logres/login.php
+        http://localhost/Project%20in%20CC105/logres/login.php
 
     http://localhost/Project%20in%20CC105/home/
 
@@ -18,14 +18,25 @@ CREATE database hospital_queuedb;
 
 USE hospital_queuedb;
 
-CREATE TABLE patients (
+CREATE TABLE IF NOT EXISTS patients (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    age INT(3),
-    condition_text VARCHAR(255),
-    type VARCHAR(50),
-    registered_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(20) DEFAULT 'Waiting'
+    name VARCHAR(255) NOT NULL,
+    birthdate DATE NOT NULL,
+    condition_text TEXT NOT NULL,
+    type ENUM('regular', 'priority') NOT NULL DEFAULT 'regular',
+    doctor_type ENUM('general_practitioner', 'pediatrician', 'dermatologist', 'cardiologist', 'orthopedic', 'gynecologist') NOT NULL,
+    room VARCHAR(10) NOT NULL,
+    registered_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('Waiting', 'Being Treated', 'Completed') NOT NULL DEFAULT 'Waiting'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE users (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    recovery_question VARCHAR(255) NOT NULL,
+    recovery_answer VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
